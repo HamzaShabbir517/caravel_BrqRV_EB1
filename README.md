@@ -211,7 +211,3 @@ The `$RV_ROOT/testbench/hex` directory contains precompiled hex files of the tes
 
 
 
-----
-MERL, the MERL logo, G-Technology, SanDisk, Tegile, Upthere, WD, brqrv Core, brqrv ISS, 
-and OmniXtend are registered trademarks or trademarks of MERL Corporation or its affiliates in the US 
-and/or other countries. All other marks are the property of their respective owners.
