@@ -1,9 +1,3 @@
-# Links to google sheet
-
-Google Sheet: https://docs.google.com/spreadsheets/d/1G5302KCdBZir8v8RD8fYUEEc2N2Q5VWQXetpALpeBBQ/edit?usp=sharing
-
-Presentation: https://docs.google.com/presentation/d/1ULtKhCK543sy2WRMz9QX6HoOgvMMswhioXEQRTPKaOo/edit?usp=sharing
-
 # eb1 brqrv RISC-V Core<sup>TM</sup> 1.3 from MERL
 
 This repository contains the brqrv eb1 Core<sup>TM</sup>  design RTL
