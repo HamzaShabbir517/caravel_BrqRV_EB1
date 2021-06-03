@@ -1,6 +1,6 @@
-# eb1 brqrv RISC-V Core<sup>TM</sup> 1.3 from MERL
+# eb1 brqrv RISC-V Core 1.3 from MERL
 
-This repository contains the brqrv eb1 Core<sup>TM</sup>  design RTL
+This repository contains the brqrv eb1 Core design RTL
 
 ## License
 
@@ -40,8 +40,6 @@ installed so that it can be used to prepare RISCV binaries to run.
 1. Determine your configuration {optional}
 1. Run make with tools/Makefile
 
-## Release Notes for this version
-Please see [release notes](release-notes.md) for changes and bug fixes in this version of brqrv
 
 ### Configurations
 
