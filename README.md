@@ -3,7 +3,7 @@
 This repository contains the brqrv eb1 Core design RTL. Brqrv Eb1 Is A Machine-Mode (M-Mode) Only, 32-Bit Cpu Small Core Which Supports Risc-V’s Integer (I), Compressed Instruction (C), Multiplication And Division (M), And Instruction-Fetch Fence, And Csr Extensions. The Core Contains A 4-Stage, Scalar, In-Order Pipeline
 
 ## Block Diagram
-https://github.com/HamzaShabbir517/caravel_BrqRV_EB1/blob/main/docs/BrqRV_EB1.png
+![](docs/BrqRV_EB1.png)
 
 ## Directory Structure
 
