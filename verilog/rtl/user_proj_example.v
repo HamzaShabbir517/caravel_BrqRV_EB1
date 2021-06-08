@@ -98,9 +98,10 @@ module user_proj_example #(
 
 
     // IO
-    assign io_out = (| lsu_axi_wstrb[3:0]) ? lsu_axi_wdata[31:0] : (| lsu_axi_wstrb[7:4]) ? 		    lsu_axi_wdata[64:32] : ;
-    assign io_oeb = {(`MPRJ_IO_PADS-1){rst}};
-    assign lsu_axi_bvalid = (wb_rst_i) : 1'b0 : (lsu_axi_wvalid) ? 1'b1 : 1'b0;
+    assign io_out[35:8] = (| lsu_axi_wstrb[3:0]) ? lsu_axi_wdata[27:0] : (| lsu_axi_wstrb[7:4]) ? 		    lsu_axi_wdata[59:32] : {28{1'b0}};
+    
+    assign io_oeb[35:8] = {28{lsu_axi_wvalid}};
+    assign lsu_axi_bvalid = (wb_rst_i) ? 1'b0 : (lsu_axi_wvalid) ? 1'b1 : 1'b0;
 
     // IRQ
     assign irq = 3'b000;	// Unused
@@ -114,7 +115,7 @@ module user_proj_example #(
     assign rx_i = io_in[5];
     assign reser_vector = 32'haffff000;
     assign jtag_id[31:28] = 4'b1;
-    assign jtag_id[27:12] = '0;
+    assign jtag_id[27:12] = {16{1'b0}};
     assign jtag_id[11:1]  = 11'h45;
     assign nmi_vector   = 32'hee000000;
     assign nmi_int   = 0;
@@ -384,7 +385,7 @@ eb1_brqrv_wrapper brqrv_top (
     .dma_axi_rlast          (),
 `endif
     .timer_int              ( 1'b0 ),
-    .extintsrc_req          ( '0   ),
+    .extintsrc_req          ( 32'b0   ),
 
     .lsu_bus_clk_en         ( 1'b1  ),// Clock ratio b/w cpu core clk & AHB master interface
     .ifu_bus_clk_en         ( 1'b0  ),// Clock ratio b/w cpu core clk & AHB master interface
@@ -425,13 +426,13 @@ eb1_brqrv_wrapper brqrv_top (
     .dec_tlu_perfcnt3       (),
 
 // remove mems DFT pins for opensource
-    .dccm_ext_in_pkt        ('0),
-    .iccm_ext_in_pkt        ('0),
-    .ic_data_ext_in_pkt     ('0),
-    .ic_tag_ext_in_pkt      ('0),
+    .dccm_ext_in_pkt        ( 48'b0),
+    .iccm_ext_in_pkt        ( 48'b0),
+    .ic_data_ext_in_pkt     ( 24'b0),
+    .ic_tag_ext_in_pkt      ( 24'b0),
 
-    .soft_int               ('0),
-    .core_id                ('0),
+    .soft_int               ( 1'b0),
+    .core_id                ( 28'b0),
     .scan_mode              ( 1'b0 ),         // To enable scan mode
     .mbist_mode             ( 1'b0 )        // to enable mbist
 
