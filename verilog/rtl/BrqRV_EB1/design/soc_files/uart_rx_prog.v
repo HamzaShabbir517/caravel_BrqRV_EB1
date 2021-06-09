@@ -16,20 +16,24 @@ module eb1_uart_rx_prog (
   parameter s_RX_STOP_BIT  = 3'b011;
   parameter s_CLEANUP      = 3'b100;
    
-  reg           r_Rx_Data_R = 1'b1;
-  reg           r_Rx_Data   = 1'b1;
+  reg           r_Rx_Data_R;
+  reg           r_Rx_Data;
    
-  reg [15:0]     r_Clock_Count = 0;
-  reg [2:0]     r_Bit_Index   = 0; //8 bits total
-  reg [7:0]     r_Rx_Byte     = 0;
-  reg           r_Rx_DV       = 0;
-  reg [2:0]     r_SM_Main     = 0;
+  reg [15:0]     r_Clock_Count;
+  reg [2:0]     r_Bit_Index; //8 bits total
+  reg [7:0]     r_Rx_Byte;
+  reg           r_Rx_DV;
+  reg [2:0]     r_SM_Main;
    
   // Purpose: Double-register the incoming data.
   // This allows it to be used in the UART RX Clock Domain.
   // (It removes problems caused by metastability)
   always @(posedge i_Clock)
-    begin
+    if(rst_ni == 1'b0) begin
+    	r_Rx_Data_R <= 1'b1;
+    	r_Rx_Data   <= 1'b1;
+    end
+    else begin
       r_Rx_Data_R <= i_Rx_Serial;
       r_Rx_Data   <= r_Rx_Data_R;
     end
@@ -38,11 +42,12 @@ module eb1_uart_rx_prog (
   // Purpose: Control RX state machine
   always @(posedge i_Clock or negedge rst_ni)
     begin
-      if (!rst_ni) begin
+      if (rst_ni == 1'b0) begin
         r_SM_Main <= s_IDLE;
         r_Rx_DV       <= 1'b0;
-        r_Clock_Count <= 0;
-        r_Bit_Index   <= 0;
+        r_Clock_Count <= 16'h0000;
+        r_Bit_Index   <= 3'b000;
+        r_Rx_Byte     <= 8'h00;
       end else begin       
       case (r_SM_Main)
         s_IDLE :
