@@ -101,6 +101,8 @@ module user_proj_example #(
     assign io_out[35:8] = (| lsu_axi_wstrb[3:0]) ? lsu_axi_wdata[27:0] : (| lsu_axi_wstrb[7:4]) ? 		    lsu_axi_wdata[59:32] : {28{1'b0}};
     
     assign io_oeb[35:8] = {28{lsu_axi_wvalid}};
+    assign io_oeb[7:0] = {8{~rst}};
+    assign io_oeb[37:36] = {2{~rst}};
     assign lsu_axi_bvalid = (wb_rst_i) ? 1'b0 : (lsu_axi_wvalid) ? 1'b1 : 1'b0;
 
     // IRQ

@@ -44,7 +44,7 @@ always @(posedge clk) begin
 	end
 	
 always @(count) begin	
-	if(count > 50) begin 
+	if(count > 1740) begin 
 	  	r_Clock = ~r_Clock;
 		count = 0;
 	end
@@ -83,21 +83,21 @@ always @(posedge clk) begin
 	START_TX : begin
 		  // $display("Sending Start Bit");
 		   r_Rx_Serial <= 1'b0;
-		   next_state = (state_count == 32'd20) ? DATA_TX : START_TX;
-		   state_count = (state_count == 32'd20) ? 32'd0 : state_count;
+		   next_state = (state_count == 32'd696) ? DATA_TX : START_TX;
+		   state_count = (state_count == 32'd696) ? 32'd0 : state_count;
        	   end
         DATA_TX : begin
         	  // $display("Sending Data Bit");
         	   r_Rx_Serial <= data[tx_count];
-        	   tx_count = (state_count == 32'd20) ? (tx_count + 32'd1) : tx_count;
+        	   tx_count = (state_count == 32'd696) ? (tx_count + 32'd1) : tx_count;
         	   next_state = (tx_count == 32'd8) ? STOP_TX : DATA_TX;
-        	   state_count = (state_count == 32'd20) ? 32'd0 : state_count;
+        	   state_count = (state_count == 32'd696) ? 32'd0 : state_count;
         	   end
         STOP_TX : begin
         	  // $display("Sending End Bit");
 		   r_Rx_Serial <= 1'b1;
-		   next_state = (state_count == 32'd20) ? IDLE : STOP_TX;
-		   state_count = (state_count == 32'd20) ? 32'd0 : state_count;
+		   next_state = (state_count == 32'd696) ? IDLE : STOP_TX;
+		   state_count = (state_count == 32'd696) ? 32'd0 : state_count;
  		   tx_count = 32'd0;
 		   valid = 1'b0;//(state_count == 32'd20) ? 1'b0 : valid;
        	   end
