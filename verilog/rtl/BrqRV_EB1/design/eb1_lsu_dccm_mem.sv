@@ -288,7 +288,7 @@ import eb1_pkg::*;
                                 );
       end
       else if (DCCM_INDEX_DEPTH == 256) begin : dccm
-         ram_256x39  dccm_bank (
+         /*ram_256x39  dccm_bank (
                                 // Primary ports
                                 .ME(dccm_clken[i]),
                                 .CLK(clk),
@@ -300,7 +300,24 @@ import eb1_pkg::*;
                                 // These are used by SoC
                                 `eb1_LOCAL_DCCM_RAM_TEST_PORTS
                                 .*
-                                );
+                                );*/
+                                sky130_sram_1kbyte_1rw1r_32x256_8 sram(
+    									`ifdef USE_POWER_PINS
+    									.vccd1(vccd1),
+    									.vssd1(vssd1),
+    									`endif
+									.clk0(clk),
+									.csb0(~dccm_clken[i]),
+									.web0(~wren_bank[i]),
+									.wmask0(4'hf),
+									.addr0(addr_bank[i]),
+									.din0(wr_data_bank[i]),
+									.dout0(dccm_bank_dout[i]),
+    									.clk1(clk),
+    									.csb1(1'b1),
+    									.addr1(10'h000),
+    									.dout1()
+    				   );
       end
       else if (DCCM_INDEX_DEPTH == 128) begin : dccm
          ram_128x39  dccm_bank (
