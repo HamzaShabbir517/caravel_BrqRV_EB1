@@ -234,7 +234,7 @@ import eb1_pkg::*;
 									.csb0(~iccm_clken[i]),
 									.web0(~wren_bank[i]),
 									.wmask0(4'hf),
-									.addr0(addr_bank[i][7:0]),
+									.addr0(addr_bank[i]),
 									.din0(iccm_bank_wr_data[i][31:0]),
 									.dout0(iccm_bank_dout[i][31:0]),
     									.clk1(clk),
