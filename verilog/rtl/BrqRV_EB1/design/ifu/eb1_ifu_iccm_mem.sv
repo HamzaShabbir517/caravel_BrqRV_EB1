@@ -24,8 +24,10 @@ import eb1_pkg::*;
 #(
 `include "eb1_param.vh"
  )(
+ `ifdef USE_POWER_PINS
    input logic 					vccd1,
    input logic						vssd1,
+ `endif
    input logic                                        clk,                                 // Clock only while core active.  Through one clock header.  For flops with    second clock header built in.  Connected to ACTIVE_L2CLK.
    input logic                                        active_clk,                          // Clock only while core active.  Through two clock headers. For flops without second clock header built in.
    input logic                                        rst_l,                               // reset, active low
@@ -232,9 +234,9 @@ import eb1_pkg::*;
 									.csb0(~iccm_clken[i]),
 									.web0(~wren_bank[i]),
 									.wmask0(4'hf),
-									.addr0(addr_bank[i]),
-									.din0(iccm_bank_wr_data[i]),
-									.dout0(iccm_bank_dout[i]),
+									.addr0(addr_bank[i][7:0]),
+									.din0(iccm_bank_wr_data[i][31:0]),
+									.dout0(iccm_bank_dout[i][31:0]),
     									.clk1(clk),
     									.csb1(1'b1),
     									.addr1(10'h000),

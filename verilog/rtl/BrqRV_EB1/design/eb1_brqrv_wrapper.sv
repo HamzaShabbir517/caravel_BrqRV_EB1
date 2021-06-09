@@ -707,7 +707,7 @@ import eb1_pkg::*;
    eb1_mem  #(.pt(pt)) mem (
                              .clk(active_l2clk),
                              .rst_l(rst_l),
-                             .iccm_rw_addr((core_rst) ? iccm_rw_addr : iccm_instr_addr),
+                             .iccm_rw_addr((core_rst) ? iccm_rw_addr : iccm_instr_addr[10:0]),
                              .iccm_wren((core_rst) ? iccm_wren : iccm_instr_we),
                              .iccm_wr_data((core_rst) ? iccm_wr_data : {7'h0,iccm_instr_wdata,7'h0,iccm_instr_wdata}),
                              .iccm_wr_size((core_rst) ? iccm_wr_size : 3'b010),
