@@ -104,7 +104,7 @@
 `define RV_ICCM_INDEX_BITS 8
 `define RV_ICCM_NUM_BANKS 4
 `define RV_ICCM_NUM_BANKS_4 
-//`define TEC_RV_ICG clockhdr
+`define TEC_RV_ICG clockhdr
 `define RV_LSU2DMA 0
 `define RV_LSU_NUM_NBLOAD_WIDTH 2
 `define RV_ICCM_ONLY 1
