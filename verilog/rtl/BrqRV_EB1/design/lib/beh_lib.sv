@@ -778,6 +778,7 @@ module rvecc_decode_64  (
 
 endmodule
 */
+
 `ifndef RV_FPGA_OPTIMIZE
 module rvclkhdr
   (
@@ -790,7 +791,7 @@ module rvclkhdr
    logic   SE;
    assign       SE = 0;
 
-   `TEC_RV_ICG clkhdr( .CLK(clk), .GCLK(l1clk), .GATE(en)); /*clkhdr ( .*, .EN(en), .CK(clk), .Q(l1clk));*/
+   sky130_fd_sc_hd__dlclkp_1 clkhdr( .CLK(clk), .GCLK(l1clk), .GATE(en)); /*clkhdr ( .*, .EN(en), .CK(clk), .Q(l1clk));*/
 
 endmodule // rvclkhdr
 `endif
@@ -809,7 +810,7 @@ module rvoclkhdr
 `ifdef RV_FPGA_OPTIMIZE
    assign l1clk = clk;
 `else
-   `TEC_RV_ICG clkhdr( .CLK(clk), .GCLK(l1clk), .GATE(en)); //clkhdr ( .*, .EN(en), .CK(clk), .Q(l1clk));
+   sky130_fd_sc_hd__dlclkp_1 clkhdr( .CLK(clk), .GCLK(l1clk), .GATE(en)); //clkhdr ( .*, .EN(en), .CK(clk), .Q(l1clk));
 `endif
 
 endmodule
