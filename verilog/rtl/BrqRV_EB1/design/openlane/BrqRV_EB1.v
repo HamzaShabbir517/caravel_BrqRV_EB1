@@ -11798,7 +11798,7 @@ module eb1_exu_alu_ctl (
 		found = 1'b0;
 		begin : sv2v_autoblock_42
 			reg signed [31:0] i;
-			for (i = 0; (i < 32) && (found == 0); i = i + 1)
+			for (i = 0; i < 32; i = i + 1)
 				if (bitmanip_lzd_os[31] == 1'b0) begin
 					bitmanip_dw_lzd_enc[5:0] = bitmanip_dw_lzd_enc[5:0] + 6'b000001;
 					bitmanip_lzd_os[31:0] = bitmanip_lzd_os[31:0] << 1;
@@ -14827,9 +14827,9 @@ module eb1_ifu_bp_ctl (
 					.dout(btb_bank0_rd_data_way1_out[j * BTB_DWIDTH+:BTB_DWIDTH])
 				);
 			end
-			function automatic signed [((pt[2172-:9] - pt[2163-:6]) >= 0 ? (pt[2172-:9] - pt[2163-:6]) + 1 : 1 - (pt[2172-:9] - pt[2163-:6])) - 1:0] sv2v_cast_C4842_signed;
+			function automatic signed [((pt[2172-:9] - pt[2163-:6]) >= 0 ? (pt[2172-:9] - pt[2163-:6]) + 1 : 1 - (pt[2172-:9] - pt[2163-:6])) - 1:0] sv2v_cast_C4842;
 				input reg signed [((pt[2172-:9] - pt[2163-:6]) >= 0 ? (pt[2172-:9] - pt[2163-:6]) + 1 : 1 - (pt[2172-:9] - pt[2163-:6])) - 1:0] inp;
-				sv2v_cast_C4842_signed = inp;
+				sv2v_cast_C4842 = inp;
 			endfunction
 			always @(*) begin : BTB_rd_mux
 				btb_bank0_rd_data_way0_f[BTB_DWIDTH - 1:0] = {BTB_DWIDTH {1'sb0}};
@@ -14839,7 +14839,7 @@ module eb1_ifu_bp_ctl (
 				begin : sv2v_autoblock_43
 					reg signed [31:0] j;
 					for (j = 0; j < LRU_SIZE; j = j + 1)
-						if (btb_rd_addr_f[pt[2172-:9]:pt[2163-:6]] == sv2v_cast_C4842_signed(j)) begin
+						if (btb_rd_addr_f[pt[2172-:9]:pt[2163-:6]] == j[6:0]) begin
 							btb_bank0_rd_data_way0_f[BTB_DWIDTH - 1:0] = btb_bank0_rd_data_way0_out[j * BTB_DWIDTH+:BTB_DWIDTH];
 							btb_bank0_rd_data_way1_f[BTB_DWIDTH - 1:0] = btb_bank0_rd_data_way1_out[j * BTB_DWIDTH+:BTB_DWIDTH];
 						end
@@ -14847,7 +14847,7 @@ module eb1_ifu_bp_ctl (
 				begin : sv2v_autoblock_44
 					reg signed [31:0] j;
 					for (j = 0; j < LRU_SIZE; j = j + 1)
-						if (btb_rd_addr_p1_f[pt[2172-:9]:pt[2163-:6]] == sv2v_cast_C4842_signed(j)) begin
+						if (btb_rd_addr_p1_f[pt[2172-:9]:pt[2163-:6]] == j[6:0]) begin
 							btb_bank0_rd_data_way0_p1_f[BTB_DWIDTH - 1:0] = btb_bank0_rd_data_way0_out[j * BTB_DWIDTH+:BTB_DWIDTH];
 							btb_bank0_rd_data_way1_p1_f[BTB_DWIDTH - 1:0] = btb_bank0_rd_data_way1_out[j * BTB_DWIDTH+:BTB_DWIDTH];
 						end
