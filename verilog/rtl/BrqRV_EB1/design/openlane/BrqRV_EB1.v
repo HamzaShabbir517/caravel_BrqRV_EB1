@@ -1,6 +1,6 @@
 module eb1_brqrv_wrapper (
-	vccd1,
-	vssd1,
+	VPWR,
+    	VGND,
 	clk,
 	rst_l,
 	dbg_rst_l,
@@ -206,8 +206,8 @@ module eb1_brqrv_wrapper (
 		sv2v_cast_1 = inp;
 	endfunction
 	parameter [2270:0] pt = {232'h0808040001c0400000000000010102000060800080103c12160802000c, sv2v_cast_1(4'h0), 5'h01, 5'h01, 6'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 7'h02, 9'h00c, 7'h04, 10'h020, 7'h07, 5'h01, 10'h027, 8'h08, 9'h004, 8'h0f, 36'h0f0040000, 14'h0004, 6'h02, 7'h03, 5'h01, 7'h05, 9'h001, 6'h02, 8'h01, 5'h01, 5'h01, 7'h01, 7'h03, 6'h03, 8'h08, 7'h02, 8'h05, 8'h03, 5'h01, 18'h00200, 7'h04, 11'h040, 5'h01, 5'h00, 11'h047, 9'h00c, 11'h040, 8'h08, 8'h02, 8'h02, 7'h02, 5'h00, 8'h06, 13'h0010, 7'h01, 5'h01, 17'h00080, 7'h06, 9'h00d, 8'h02, 8'h02, 5'h01, 7'h02, 9'h003, 9'h004, 9'h00c, 5'h01, 5'h00, 8'h08, 9'h004, 5'h01, 8'h0a, 36'h0affff000, 14'h0004, 5'h01, 6'h02, 8'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 5'h00, 5'h00, 5'h01, 6'h02, 8'h03, 9'h004, 7'h02, 9'h00c, 8'h04, 5'h00, 5'h00, 36'h0f00c0000, 9'h00f, 8'h01, 8'h0f, 13'h0020, 12'h01f, 13'h0020, 8'h08, 5'h01, 6'h02, 8'h01, 5'h01};
-	input wire vccd1;
-	input wire vssd1;
+	input wire VPWR;
+	input wire VGND;
 	input wire clk;
 	input wire rst_l;
 	input wire dbg_rst_l;
@@ -818,8 +818,8 @@ module eb1_brqrv_wrapper (
 		.iccm_wren((core_rst ? iccm_wren : iccm_instr_we)),
 		.iccm_wr_data((core_rst ? iccm_wr_data : {7'h00, iccm_instr_wdata, 7'h00, iccm_instr_wdata})),
 		.iccm_wr_size((core_rst ? iccm_wr_size : 3'b010)),
-		.vccd1(vccd1),
-		.vssd1(vssd1),
+		.VPWR(VPWR),
+    		.VGND(VGND),
 		.dccm_clk_override(dccm_clk_override),
 		.icm_clk_override(icm_clk_override),
 		.dec_tlu_core_ecc_disable(dec_tlu_core_ecc_disable),
@@ -3056,8 +3056,8 @@ module eb1_iccm_controller (
 		end
 endmodule
 module eb1_mem (
-	vccd1,
-	vssd1,
+	VPWR,
+    	VGND,
 	clk,
 	rst_l,
 	dccm_clk_override,
@@ -3113,8 +3113,8 @@ module eb1_mem (
 		sv2v_cast_1 = inp;
 	endfunction
 	parameter [2270:0] pt = {232'h0808040001c0400000000000010102000060800080103c12160802000c, sv2v_cast_1(4'h0), 5'h01, 5'h01, 6'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 7'h02, 9'h00c, 7'h04, 10'h020, 7'h07, 5'h01, 10'h027, 8'h08, 9'h004, 8'h0f, 36'h0f0040000, 14'h0004, 6'h02, 7'h03, 5'h01, 7'h05, 9'h001, 6'h02, 8'h01, 5'h01, 5'h01, 7'h01, 7'h03, 6'h03, 8'h08, 7'h02, 8'h05, 8'h03, 5'h01, 18'h00200, 7'h04, 11'h040, 5'h01, 5'h00, 11'h047, 9'h00c, 11'h040, 8'h08, 8'h02, 8'h02, 7'h02, 5'h00, 8'h06, 13'h0010, 7'h01, 5'h01, 17'h00080, 7'h06, 9'h00d, 8'h02, 8'h02, 5'h01, 7'h02, 9'h003, 9'h004, 9'h00c, 5'h01, 5'h00, 8'h08, 9'h004, 5'h01, 8'h0a, 36'h0affff000, 14'h0004, 5'h01, 6'h02, 8'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 5'h00, 5'h00, 5'h01, 6'h02, 8'h03, 9'h004, 7'h02, 9'h00c, 8'h04, 5'h00, 5'h00, 36'h0f00c0000, 9'h00f, 8'h01, 8'h0f, 13'h0020, 12'h01f, 13'h0020, 8'h08, 5'h01, 6'h02, 8'h01, 5'h01};
-	input wire vccd1;
-	input wire vssd1;
+	input wire VPWR;
+	input wire VGND;
 	input wire clk;
 	input wire rst_l;
 	input wire dccm_clk_override;
@@ -15269,6 +15269,8 @@ module eb1_ifu_iccm_mem (
 			end
 			else if (pt[917-:8] == 8) begin : iccm
 				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
+					.VPWR(VPWR),
+    					.VGND(VGND),
 					.clk0(clk),
 					.csb0(~iccm_clken[i]),
 					.web0(~wren_bank[i]),
@@ -15304,6 +15306,8 @@ module eb1_ifu_iccm_mem (
 			end
 			else if (pt[917-:8] == 10) begin : iccm
 				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
+					.VPWR(VPWR),
+    					.VGND(VGND),
 					.clk0(clk),
 					.csb0(~iccm_clken[i]),
 					.web0(~wren_bank[i]),
@@ -20775,6 +20779,8 @@ module eb1_lsu_dccm_mem (
 			end
 			else if (DCCM_INDEX_DEPTH == 1024) begin : dccm
 				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
+					.VPWR(VPWR),
+    					.VGND(VGND),
 					.clk0(clk),
 					.csb0(~dccm_clken[i]),
 					.web0(~wren_bank[i]),
@@ -20811,6 +20817,8 @@ module eb1_lsu_dccm_mem (
 			end
 			else if (DCCM_INDEX_DEPTH == 256) begin : dccm
 				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
+					.VPWR(VPWR),
+    					.VGND(VGND),
 					.clk0(clk),
 					.csb0(~dccm_clken[i]),
 					.web0(~wren_bank[i]),
@@ -22924,6 +22932,8 @@ module rvclkhdr (
 	wire SE;
 	assign SE = 0;
 	sky130_fd_sc_hd__dlclkp_1 clkhdr(
+		.VPWR(1'b1),
+		.VGND(1'b0),
 		.CLK(clk),
 		.GCLK(l1clk),
 		.GATE(en)
@@ -22942,6 +22952,8 @@ module rvoclkhdr (
 	wire SE;
 	assign SE = 0;
 	sky130_fd_sc_hd__dlclkp_1 clkhdr(
+		.VPWR(1'b1),
+		.VGND(1'b0),
 		.CLK(clk),
 		.GCLK(l1clk),
 		.GATE(en)

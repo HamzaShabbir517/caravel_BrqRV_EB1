@@ -77,7 +77,7 @@ module user_proj_example #(
     wire clk;
     wire rst;
     wire rx_i;
-    wire [31:0] reser_vector;
+    wire [31:0] reset_vector;
     wire [31:0] jtag_id;
     wire [31:0] nmi_vector;
     wire nmi_int;
@@ -89,7 +89,7 @@ module user_proj_example #(
     wire		lsu_axi_wvalid;
     wire [63:0]	lsu_axi_wdata;
     wire [7:0]         lsu_axi_wstrb;
-    wire		lsu_axi_bvalid;
+    reg		lsu_axi_bvalid;
 
 
     // WB MI A
@@ -103,8 +103,10 @@ module user_proj_example #(
     assign io_oeb[35:8] = {28{~lsu_axi_wvalid}};
     assign io_oeb[7:0] = {8{~rst}};
     assign io_oeb[37:36] = {2{~rst}};
-    assign lsu_axi_bvalid = (wb_rst_i) ? 1'b0 : (lsu_axi_wvalid) ? 1'b1 : 1'b0;
-
+    
+    always @(posedge wb_clk_i) begin
+    	lsu_axi_bvalid = (lsu_axi_wvalid) ? 1'b1 : 1'b0;
+    end
     // IRQ
     assign irq = 3'b000;	// Unused
 
@@ -113,9 +115,10 @@ module user_proj_example #(
 
     // Assuming LA probes [65:64] are for controlling the count clk & reset  
     assign clk = (~la_oenb[65]) ? la_data_in[65] :  wb_clk_i;
+    //assign clk = wb_clk_i;
     assign rst = (~la_oenb[64]) ? la_data_in[64] : ~wb_rst_i;
     assign rx_i = io_in[5];
-    assign reser_vector = 32'haffff000;
+    assign reset_vector = 32'haffff000;
     assign jtag_id[31:28] = 4'b1;
     assign jtag_id[27:12] = {16{1'b0}};
     assign jtag_id[11:1]  = 11'h45;
@@ -128,13 +131,13 @@ module user_proj_example #(
    //=========================================================================-
 eb1_brqrv_wrapper brqrv_top (
 `ifdef USE_POWER_PINS
-    .vccd1		     ( vccd1         ),
-    .vssd1		     ( vssd1         ),
+    .VPWR		     ( vccd1	      ),
+    .VGND                   ( vssd1         ),
 `endif
     .rst_l                  ( rst           ),
-    .dbg_rst_l              ( 1'b1          ),
+    .dbg_rst_l              ( ~wb_rst_i     ),
     .clk                    ( clk           ),
-    .rst_vec                ( reset_vector[31:1]),
+    .rst_vec                ( reset_vector[31:1]  ),
     .nmi_int                ( nmi_int       ),
     .nmi_vec                ( nmi_vector[31:1]),
     .jtag_id                ( jtag_id[31:1]),
@@ -227,7 +230,7 @@ eb1_brqrv_wrapper brqrv_top (
     .lsu_axi_wlast          (),
 
     .lsu_axi_bvalid         (lsu_axi_bvalid),
-    .lsu_axi_bready         (1'b1),
+    .lsu_axi_bready         (),
     .lsu_axi_bresp          (),
     .lsu_axi_bid            (),
 
@@ -250,13 +253,12 @@ eb1_brqrv_wrapper brqrv_top (
     .lsu_axi_rid            (),
     .lsu_axi_rdata          (),
     .lsu_axi_rresp          (),
-    .lsu_axi_rlast          (),
+    //.lsu_axi_rlast          (),
     
-`ifdef RV_BUILD_AXI4
     //-------------------------- IFU AXI signals--------------------------
     // AXI Write Channels
     .ifu_axi_awvalid        (),
-    .ifu_axi_awready        (),
+    //.ifu_axi_awready        (1'b0),
     .ifu_axi_awid           (),
     .ifu_axi_awaddr         (),
     .ifu_axi_awregion       (),
@@ -269,15 +271,15 @@ eb1_brqrv_wrapper brqrv_top (
     .ifu_axi_awqos          (),
 
     .ifu_axi_wvalid         (),
-    .ifu_axi_wready         (),
+    //.ifu_axi_wready         (1'b0),
     .ifu_axi_wdata          (),
     .ifu_axi_wstrb          (),
     .ifu_axi_wlast          (),
 
-    .ifu_axi_bvalid         (),
+    //.ifu_axi_bvalid         (1'b0),
     .ifu_axi_bready         (),
-    .ifu_axi_bresp          (),
-    .ifu_axi_bid            (),
+    //.ifu_axi_bresp          (2'b0),
+    //.ifu_axi_bid            ('0),
 
     .ifu_axi_arvalid        (),
     .ifu_axi_arready        (),
@@ -297,12 +299,12 @@ eb1_brqrv_wrapper brqrv_top (
     .ifu_axi_rid            (),
     .ifu_axi_rdata          (),
     .ifu_axi_rresp          (),
-    .ifu_axi_rlast          (),
+    //.ifu_axi_rlast          (),
 
     //-------------------------- SB AXI signals--------------------------
     // AXI Write Channels
     .sb_axi_awvalid         (),
-    .sb_axi_awready         (),
+    .sb_axi_awready         (1'b0),
     .sb_axi_awid            (),
     .sb_axi_awaddr          (),
     .sb_axi_awregion        (),
@@ -315,19 +317,19 @@ eb1_brqrv_wrapper brqrv_top (
     .sb_axi_awqos           (),
 
     .sb_axi_wvalid          (),
-    .sb_axi_wready          (),
+    .sb_axi_wready          (1'b0),
     .sb_axi_wdata           (),
     .sb_axi_wstrb           (),
     .sb_axi_wlast           (),
 
-    .sb_axi_bvalid          (),
+    .sb_axi_bvalid          (1'b0),
     .sb_axi_bready          (),
-    .sb_axi_bresp           (),
-    .sb_axi_bid             (),
+    .sb_axi_bresp           (2'b0),
+    //.sb_axi_bid             ('0),
 
 
     .sb_axi_arvalid         (),
-    .sb_axi_arready         (),
+    .sb_axi_arready         (1'b0),
     .sb_axi_arid            (),
     .sb_axi_araddr          (),
     .sb_axi_arregion        (),
@@ -339,60 +341,60 @@ eb1_brqrv_wrapper brqrv_top (
     .sb_axi_arprot          (),
     .sb_axi_arqos           (),
 
-    .sb_axi_rvalid          (),
+    .sb_axi_rvalid          (1'b0),
     .sb_axi_rready          (),
-    .sb_axi_rid             (),
-    .sb_axi_rdata           (),
-    .sb_axi_rresp           (),
-    .sb_axi_rlast           (),
+    //.sb_axi_rid             ('0),
+    .sb_axi_rdata           (64'b0),
+    .sb_axi_rresp           (2'b0),
+    //.sb_axi_rlast           (1'b0),
 
     //-------------------------- DMA AXI signals--------------------------
     // AXI Write Channels
-    .dma_axi_awvalid        (),
+    .dma_axi_awvalid        (1'b0),
     .dma_axi_awready        (),
     .dma_axi_awid           ('0),
-    .dma_axi_awaddr         (),
-    .dma_axi_awsize         (),
-    .dma_axi_awprot         (),
-    .dma_axi_awlen          (),
-    .dma_axi_awburst        (),
+    .dma_axi_awaddr         (32'b0),
+    .dma_axi_awsize         (3'b0),
+    //.dma_axi_awprot         (3'b0),
+    //.dma_axi_awlen          (8'b0),
+    //.dma_axi_awburst        (2'b0),
 
 
-    .dma_axi_wvalid         (),
+    .dma_axi_wvalid         (1'b0),
     .dma_axi_wready         (),
-    .dma_axi_wdata          (),
-    .dma_axi_wstrb          (),
-    .dma_axi_wlast          (),
+    .dma_axi_wdata          (64'b0),
+    .dma_axi_wstrb          (8'b0),
+    //.dma_axi_wlast          (1'b0),
 
     .dma_axi_bvalid         (),
-    .dma_axi_bready         (),
+    .dma_axi_bready         (1'b0),
     .dma_axi_bresp          (),
     .dma_axi_bid            (),
 
 
-    .dma_axi_arvalid        (),
+    .dma_axi_arvalid        (1'b0),
     .dma_axi_arready        (),
     .dma_axi_arid           ('0),
-    .dma_axi_araddr         (),
-    .dma_axi_arsize         (),
-    .dma_axi_arprot         (),
-    .dma_axi_arlen          (),
-    .dma_axi_arburst        (),
+    .dma_axi_araddr         (32'b0),
+    .dma_axi_arsize         (3'b0),
+    //.dma_axi_arprot         (3'b0),
+    //.dma_axi_arlen          (8'b0),
+    //.dma_axi_arburst        (2'b0),
 
     .dma_axi_rvalid         (),
-    .dma_axi_rready         (),
+    .dma_axi_rready         (1'b0),
     .dma_axi_rid            (),
     .dma_axi_rdata          (),
     .dma_axi_rresp          (),
     .dma_axi_rlast          (),
-`endif
+
     .timer_int              ( 1'b0 ),
-    .extintsrc_req          ( 32'b0   ),
+    .extintsrc_req          ( 31'b0   ),
 
     .lsu_bus_clk_en         ( 1'b1  ),// Clock ratio b/w cpu core clk & AHB master interface
-    .ifu_bus_clk_en         ( 1'b0  ),// Clock ratio b/w cpu core clk & AHB master interface
+    .ifu_bus_clk_en         ( 1'b1  ),// Clock ratio b/w cpu core clk & AHB master interface
     .dbg_bus_clk_en         ( 1'b1  ),// Clock ratio b/w cpu core clk & AHB Debug master interface
-    .dma_bus_clk_en         ( 1'b0  ),// Clock ratio b/w cpu core clk & AHB slave interface
+    .dma_bus_clk_en         ( 1'b1  ),// Clock ratio b/w cpu core clk & AHB slave interface
 
     .trace_rv_i_insn_ip     (),
     .trace_rv_i_address_ip  (),
@@ -402,11 +404,11 @@ eb1_brqrv_wrapper brqrv_top (
     .trace_rv_i_interrupt_ip(),
     .trace_rv_i_tval_ip     (),
 
-    .jtag_tck               ( io_in[0]  ),
-    .jtag_tms               ( io_in[1]  ),
-    .jtag_tdi               ( io_in[3]  ),
-    .jtag_trst_n            ( io_in[2]  ),
-    .jtag_tdo               ( io_in[4]  ),
+    .jtag_tck               ( (io_oeb[0]) ? io_in[0] : 1'b0 ),
+    .jtag_tms               ( (io_oeb[1]) ? io_in[1] : 1'b0 ),
+    .jtag_tdi               ( (io_oeb[3]) ? io_in[3] : 1'b0 ),
+    .jtag_trst_n            ( (io_oeb[2]) ? io_in[2] : 1'b0  ),
+    .jtag_tdo               ( io_out[4]  ),
 
     .mpc_debug_halt_ack     ( ),
     .mpc_debug_halt_req     ( 1'b0),
@@ -428,15 +430,15 @@ eb1_brqrv_wrapper brqrv_top (
     .dec_tlu_perfcnt3       (),
 
 // remove mems DFT pins for opensource
-    .dccm_ext_in_pkt        ( 48'b0),
-    .iccm_ext_in_pkt        ( 48'b0),
-    .ic_data_ext_in_pkt     ( 24'b0),
-    .ic_tag_ext_in_pkt      ( 24'b0),
+   // .dccm_ext_in_pkt        ( 48'b0),
+   // .iccm_ext_in_pkt        ( 48'b0),
+   // .ic_data_ext_in_pkt     ( 48'b0),
+    //.ic_tag_ext_in_pkt      ( 24'b0),
 
     .soft_int               ( 1'b0),
     .core_id                ( 28'b0),
-    .scan_mode              ( 1'b0 ),         // To enable scan mode
-    .mbist_mode             ( 1'b0 )        // to enable mbist
+    .scan_mode              ( 1'b0 )         // To enable scan mode
+    //.mbist_mode             ( 1'b0 )        // to enable mbist
 
 );
 
