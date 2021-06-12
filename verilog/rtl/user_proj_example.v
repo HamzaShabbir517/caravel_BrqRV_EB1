@@ -231,8 +231,8 @@ eb1_brqrv_wrapper brqrv_top (
 
     .lsu_axi_bvalid         (lsu_axi_bvalid),
     .lsu_axi_bready         (),
-    .lsu_axi_bresp          (),
-    .lsu_axi_bid            (),
+    .lsu_axi_bresp          (2'b00),
+    .lsu_axi_bid            (3'b000),
 
 
     .lsu_axi_arvalid        (),
@@ -253,12 +253,12 @@ eb1_brqrv_wrapper brqrv_top (
     .lsu_axi_rid            (),
     .lsu_axi_rdata          (),
     .lsu_axi_rresp          (),
-    //.lsu_axi_rlast          (),
+    .lsu_axi_rlast          (),
     
     //-------------------------- IFU AXI signals--------------------------
     // AXI Write Channels
     .ifu_axi_awvalid        (),
-    //.ifu_axi_awready        (1'b0),
+    .ifu_axi_awready        (1'b0),
     .ifu_axi_awid           (),
     .ifu_axi_awaddr         (),
     .ifu_axi_awregion       (),
@@ -271,15 +271,15 @@ eb1_brqrv_wrapper brqrv_top (
     .ifu_axi_awqos          (),
 
     .ifu_axi_wvalid         (),
-    //.ifu_axi_wready         (1'b0),
+    .ifu_axi_wready         (1'b0),
     .ifu_axi_wdata          (),
     .ifu_axi_wstrb          (),
     .ifu_axi_wlast          (),
 
-    //.ifu_axi_bvalid         (1'b0),
+    .ifu_axi_bvalid         (1'b0),
     .ifu_axi_bready         (),
-    //.ifu_axi_bresp          (2'b0),
-    //.ifu_axi_bid            ('0),
+    .ifu_axi_bresp          (2'b0),
+    .ifu_axi_bid            (3'b0),
 
     .ifu_axi_arvalid        (),
     .ifu_axi_arready        (),
@@ -299,7 +299,7 @@ eb1_brqrv_wrapper brqrv_top (
     .ifu_axi_rid            (),
     .ifu_axi_rdata          (),
     .ifu_axi_rresp          (),
-    //.ifu_axi_rlast          (),
+    .ifu_axi_rlast          (),
 
     //-------------------------- SB AXI signals--------------------------
     // AXI Write Channels
@@ -325,7 +325,7 @@ eb1_brqrv_wrapper brqrv_top (
     .sb_axi_bvalid          (1'b0),
     .sb_axi_bready          (),
     .sb_axi_bresp           (2'b0),
-    //.sb_axi_bid             ('0),
+    .sb_axi_bid             (1'b0),
 
 
     .sb_axi_arvalid         (),
@@ -343,28 +343,28 @@ eb1_brqrv_wrapper brqrv_top (
 
     .sb_axi_rvalid          (1'b0),
     .sb_axi_rready          (),
-    //.sb_axi_rid             ('0),
+    .sb_axi_rid             (1'b0),
     .sb_axi_rdata           (64'b0),
     .sb_axi_rresp           (2'b0),
-    //.sb_axi_rlast           (1'b0),
+    .sb_axi_rlast           (1'b0),
 
     //-------------------------- DMA AXI signals--------------------------
     // AXI Write Channels
     .dma_axi_awvalid        (1'b0),
     .dma_axi_awready        (),
-    .dma_axi_awid           ('0),
+    .dma_axi_awid           (1'b0),
     .dma_axi_awaddr         (32'b0),
     .dma_axi_awsize         (3'b0),
-    //.dma_axi_awprot         (3'b0),
-    //.dma_axi_awlen          (8'b0),
-    //.dma_axi_awburst        (2'b0),
+    .dma_axi_awprot         (3'b0),
+    .dma_axi_awlen          (8'b0),
+    .dma_axi_awburst        (2'b0),
 
 
     .dma_axi_wvalid         (1'b0),
     .dma_axi_wready         (),
     .dma_axi_wdata          (64'b0),
     .dma_axi_wstrb          (8'b0),
-    //.dma_axi_wlast          (1'b0),
+    .dma_axi_wlast          (1'b0),
 
     .dma_axi_bvalid         (),
     .dma_axi_bready         (1'b0),
@@ -374,12 +374,12 @@ eb1_brqrv_wrapper brqrv_top (
 
     .dma_axi_arvalid        (1'b0),
     .dma_axi_arready        (),
-    .dma_axi_arid           ('0),
+    .dma_axi_arid           (1'b0),
     .dma_axi_araddr         (32'b0),
     .dma_axi_arsize         (3'b0),
-    //.dma_axi_arprot         (3'b0),
-    //.dma_axi_arlen          (8'b0),
-    //.dma_axi_arburst        (2'b0),
+    .dma_axi_arprot         (3'b0),
+    .dma_axi_arlen          (8'b0),
+    .dma_axi_arburst        (2'b0),
 
     .dma_axi_rvalid         (),
     .dma_axi_rready         (1'b0),
@@ -430,15 +430,15 @@ eb1_brqrv_wrapper brqrv_top (
     .dec_tlu_perfcnt3       (),
 
 // remove mems DFT pins for opensource
-   // .dccm_ext_in_pkt        ( 48'b0),
-   // .iccm_ext_in_pkt        ( 48'b0),
-   // .ic_data_ext_in_pkt     ( 48'b0),
-    //.ic_tag_ext_in_pkt      ( 24'b0),
+    .dccm_ext_in_pkt        ( 48'b0),
+    .iccm_ext_in_pkt        ( 48'b0),
+    .ic_data_ext_in_pkt     ( 48'b0),
+    .ic_tag_ext_in_pkt      ( 24'b0),
 
     .soft_int               ( 1'b0),
     .core_id                ( 28'b0),
-    .scan_mode              ( 1'b0 )         // To enable scan mode
-    //.mbist_mode             ( 1'b0 )        // to enable mbist
+    .scan_mode              ( 1'b0 ),         // To enable scan mode
+    .mbist_mode             ( 1'b0 )        // to enable mbist
 
 );
 

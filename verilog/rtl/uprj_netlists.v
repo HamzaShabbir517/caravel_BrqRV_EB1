@@ -28,7 +28,7 @@
 `else
     `include "user_project_wrapper.v"
     `include "user_proj_example.v"
-    //`include "BrqRV_EB1/design/openlane/BrqRV_EB1.v"
-    `include "BrqRV_EB1/design/openlane/powered_netlist.v"   
+    `include "BrqRV_EB1/design/openlane/BrqRV_EB1.v"
+    //`include "BrqRV_EB1/design/openlane/powered_netlist.v"   
     `include "BrqRV_EB1/design/sky130_sram_1kbyte_1rw1r_32x256_8.v"
 `endif

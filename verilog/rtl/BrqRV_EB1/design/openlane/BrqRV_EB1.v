@@ -1,6 +1,6 @@
 module eb1_brqrv_wrapper (
 	VPWR,
-    	VGND,
+	VGND,
 	clk,
 	rst_l,
 	dbg_rst_l,
@@ -819,7 +819,7 @@ module eb1_brqrv_wrapper (
 		.iccm_wr_data((core_rst ? iccm_wr_data : {7'h00, iccm_instr_wdata, 7'h00, iccm_instr_wdata})),
 		.iccm_wr_size((core_rst ? iccm_wr_size : 3'b010)),
 		.VPWR(VPWR),
-    		.VGND(VGND),
+		.VGND(VGND),
 		.dccm_clk_override(dccm_clk_override),
 		.icm_clk_override(icm_clk_override),
 		.dec_tlu_core_ecc_disable(dec_tlu_core_ecc_disable),
@@ -3057,7 +3057,7 @@ module eb1_iccm_controller (
 endmodule
 module eb1_mem (
 	VPWR,
-    	VGND,
+	VGND,
 	clk,
 	rst_l,
 	dccm_clk_override,
@@ -3175,6 +3175,8 @@ module eb1_mem (
 		if (pt[1365-:5] == 1) begin : Gen_dccm_enable
 			eb1_lsu_dccm_mem #(.pt(pt)) dccm(
 				.clk_override(dccm_clk_override),
+				.VPWR(VPWR),
+				.VGND(VGND),
 				.clk(clk),
 				.active_clk(active_clk),
 				.rst_l(rst_l),
@@ -3214,6 +3216,8 @@ module eb1_mem (
 	generate
 		if (pt[927-:5]) begin : iccm
 			eb1_ifu_iccm_mem #(.pt(pt)) iccm(
+				.VPWR(VPWR),
+				.VGND(VGND),
 				.clk(clk),
 				.active_clk(active_clk),
 				.rst_l(rst_l),
@@ -11798,7 +11802,7 @@ module eb1_exu_alu_ctl (
 		found = 1'b0;
 		begin : sv2v_autoblock_42
 			reg signed [31:0] i;
-			for (i = 0; i < 32; i = i + 1)
+			for (i = 0; (i < 32) && (found == 0); i = i + 1)
 				if (bitmanip_lzd_os[31] == 1'b0) begin
 					bitmanip_dw_lzd_enc[5:0] = bitmanip_dw_lzd_enc[5:0] + 6'b000001;
 					bitmanip_lzd_os[31:0] = bitmanip_lzd_os[31:0] << 1;
@@ -14827,9 +14831,9 @@ module eb1_ifu_bp_ctl (
 					.dout(btb_bank0_rd_data_way1_out[j * BTB_DWIDTH+:BTB_DWIDTH])
 				);
 			end
-			function automatic signed [((pt[2172-:9] - pt[2163-:6]) >= 0 ? (pt[2172-:9] - pt[2163-:6]) + 1 : 1 - (pt[2172-:9] - pt[2163-:6])) - 1:0] sv2v_cast_C4842;
+			function automatic signed [((pt[2172-:9] - pt[2163-:6]) >= 0 ? (pt[2172-:9] - pt[2163-:6]) + 1 : 1 - (pt[2172-:9] - pt[2163-:6])) - 1:0] sv2v_cast_C4842_signed;
 				input reg signed [((pt[2172-:9] - pt[2163-:6]) >= 0 ? (pt[2172-:9] - pt[2163-:6]) + 1 : 1 - (pt[2172-:9] - pt[2163-:6])) - 1:0] inp;
-				sv2v_cast_C4842 = inp;
+				sv2v_cast_C4842_signed = inp;
 			endfunction
 			always @(*) begin : BTB_rd_mux
 				btb_bank0_rd_data_way0_f[BTB_DWIDTH - 1:0] = {BTB_DWIDTH {1'sb0}};
@@ -14839,7 +14843,7 @@ module eb1_ifu_bp_ctl (
 				begin : sv2v_autoblock_43
 					reg signed [31:0] j;
 					for (j = 0; j < LRU_SIZE; j = j + 1)
-						if (btb_rd_addr_f[pt[2172-:9]:pt[2163-:6]] == j[6:0]) begin
+						if (btb_rd_addr_f[pt[2172-:9]:pt[2163-:6]] == sv2v_cast_C4842_signed(j)) begin
 							btb_bank0_rd_data_way0_f[BTB_DWIDTH - 1:0] = btb_bank0_rd_data_way0_out[j * BTB_DWIDTH+:BTB_DWIDTH];
 							btb_bank0_rd_data_way1_f[BTB_DWIDTH - 1:0] = btb_bank0_rd_data_way1_out[j * BTB_DWIDTH+:BTB_DWIDTH];
 						end
@@ -14847,7 +14851,7 @@ module eb1_ifu_bp_ctl (
 				begin : sv2v_autoblock_44
 					reg signed [31:0] j;
 					for (j = 0; j < LRU_SIZE; j = j + 1)
-						if (btb_rd_addr_p1_f[pt[2172-:9]:pt[2163-:6]] == j[6:0]) begin
+						if (btb_rd_addr_p1_f[pt[2172-:9]:pt[2163-:6]] == sv2v_cast_C4842_signed(j)) begin
 							btb_bank0_rd_data_way0_p1_f[BTB_DWIDTH - 1:0] = btb_bank0_rd_data_way0_out[j * BTB_DWIDTH+:BTB_DWIDTH];
 							btb_bank0_rd_data_way1_p1_f[BTB_DWIDTH - 1:0] = btb_bank0_rd_data_way1_out[j * BTB_DWIDTH+:BTB_DWIDTH];
 						end
@@ -15145,6 +15149,8 @@ module eb1_ifu_compress_ctl (
 	assign legal = (((((((((((((((((((((((((((((((((!i[13] & !i[12]) & i[11]) & i[1]) & !i[0]) | ((((!i[13] & !i[12]) & i[6]) & i[1]) & !i[0])) | (((!i[15] & !i[13]) & i[11]) & !i[1])) | ((((!i[13] & !i[12]) & i[5]) & i[1]) & !i[0])) | ((((!i[13] & !i[12]) & i[10]) & i[1]) & !i[0])) | (((!i[15] & !i[13]) & i[6]) & !i[1])) | (((i[15] & !i[12]) & !i[1]) & i[0])) | ((((!i[13] & !i[12]) & i[9]) & i[1]) & !i[0])) | (((!i[12] & i[6]) & !i[1]) & i[0])) | (((!i[15] & !i[13]) & i[5]) & !i[1])) | ((((!i[13] & !i[12]) & i[8]) & i[1]) & !i[0])) | (((!i[12] & i[5]) & !i[1]) & i[0])) | (((!i[15] & !i[13]) & i[10]) & !i[1])) | ((((!i[13] & !i[12]) & i[7]) & i[1]) & !i[0])) | ((((i[12] & i[11]) & !i[10]) & !i[1]) & i[0])) | (((!i[15] & !i[13]) & i[9]) & !i[1])) | ((((!i[13] & !i[12]) & i[4]) & i[1]) & !i[0])) | (((i[13] & i[12]) & !i[1]) & i[0])) | (((!i[15] & !i[13]) & i[8]) & !i[1])) | ((((!i[13] & !i[12]) & i[3]) & i[1]) & !i[0])) | (((i[13] & i[4]) & !i[1]) & i[0])) | ((((!i[13] & !i[12]) & i[2]) & i[1]) & !i[0])) | (((!i[15] & !i[13]) & i[7]) & !i[1])) | (((i[13] & i[3]) & !i[1]) & i[0])) | (((i[13] & i[2]) & !i[1]) & i[0])) | ((i[14] & !i[13]) & !i[1])) | (((!i[14] & !i[12]) & !i[1]) & i[0])) | ((((i[15] & !i[13]) & i[12]) & i[1]) & !i[0])) | ((((!i[15] & !i[13]) & !i[12]) & i[1]) & !i[0])) | (((!i[15] & !i[13]) & i[12]) & !i[1])) | ((i[14] & !i[13]) & !i[0]);
 endmodule
 module eb1_ifu_iccm_mem (
+	VPWR,
+	VGND,
 	clk,
 	active_clk,
 	rst_l,
@@ -15166,6 +15172,8 @@ module eb1_ifu_iccm_mem (
 		sv2v_cast_1 = inp;
 	endfunction
 	parameter [2270:0] pt = {232'h0808040001c0400000000000010102000060800080103c12160802000c, sv2v_cast_1(4'h0), 5'h01, 5'h01, 6'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 7'h02, 9'h00c, 7'h04, 10'h020, 7'h07, 5'h01, 10'h027, 8'h08, 9'h004, 8'h0f, 36'h0f0040000, 14'h0004, 6'h02, 7'h03, 5'h01, 7'h05, 9'h001, 6'h02, 8'h01, 5'h01, 5'h01, 7'h01, 7'h03, 6'h03, 8'h08, 7'h02, 8'h05, 8'h03, 5'h01, 18'h00200, 7'h04, 11'h040, 5'h01, 5'h00, 11'h047, 9'h00c, 11'h040, 8'h08, 8'h02, 8'h02, 7'h02, 5'h00, 8'h06, 13'h0010, 7'h01, 5'h01, 17'h00080, 7'h06, 9'h00d, 8'h02, 8'h02, 5'h01, 7'h02, 9'h003, 9'h004, 9'h00c, 5'h01, 5'h00, 8'h08, 9'h004, 5'h01, 8'h0a, 36'h0affff000, 14'h0004, 5'h01, 6'h02, 8'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 5'h00, 5'h00, 5'h01, 6'h02, 8'h03, 9'h004, 7'h02, 9'h00c, 8'h04, 5'h00, 5'h00, 36'h0f00c0000, 9'h00f, 8'h01, 8'h0f, 13'h0020, 12'h01f, 13'h0020, 8'h08, 5'h01, 6'h02, 8'h01, 5'h01};
+	input wire VPWR;
+	input wire VGND;
 	input wire clk;
 	input wire active_clk;
 	input wire rst_l;
@@ -15269,8 +15277,8 @@ module eb1_ifu_iccm_mem (
 			end
 			else if (pt[917-:8] == 8) begin : iccm
 				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
-					.VPWR(VPWR),
-    					.VGND(VGND),
+					.vccd1(VPWR),
+					.vssd1(VGND),
 					.clk0(clk),
 					.csb0(~iccm_clken[i]),
 					.web0(~wren_bank[i]),
@@ -15280,7 +15288,7 @@ module eb1_ifu_iccm_mem (
 					.dout0(iccm_bank_dout[(i * 39) + 31-:32]),
 					.clk1(clk),
 					.csb1(1'b1),
-					.addr1(10'h000),
+					.addr1(8'h00),
 					.dout1()
 				);
 			end
@@ -15306,8 +15314,8 @@ module eb1_ifu_iccm_mem (
 			end
 			else if (pt[917-:8] == 10) begin : iccm
 				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
-					.VPWR(VPWR),
-    					.VGND(VGND),
+					.vccd1(VPWR),
+					.vssd1(VGND),
 					.clk0(clk),
 					.csb0(~iccm_clken[i]),
 					.web0(~wren_bank[i]),
@@ -15317,7 +15325,7 @@ module eb1_ifu_iccm_mem (
 					.dout0(iccm_bank_dout[i * 39+:39]),
 					.clk1(clk),
 					.csb1(1'b1),
-					.addr1(10'h000),
+					.addr1(8'h00),
 					.dout1()
 				);
 			end
@@ -15639,8 +15647,6 @@ module eb1_ifu_ifc_ctl (
 	assign fb_write_ns[3:0] = (((({4 {flush_fb}} & 4'b0001) | ({4 {~flush_fb & fb_right}} & {1'b0, fb_write_f[3:1]})) | ({4 {~flush_fb & fb_right2}} & {2'b00, fb_write_f[3:2]})) | ({4 {~flush_fb & fb_left}} & {fb_write_f[2:0], 1'b0})) | ({4 {((~flush_fb & ~fb_right) & ~fb_right2) & ~fb_left}} & fb_write_f[3:0]);
 	assign fb_full_f_ns = fb_write_ns[3];
 	localparam [1:0] IDLE = 2'b00;
-	localparam [1:0] FETCH = 2'b01;
-	localparam [1:0] STALL = 2'b10;
 	assign idle = state == IDLE;
 	localparam [1:0] WFM = 2'b11;
 	assign wfm = state == WFM;
@@ -20585,6 +20591,8 @@ module eb1_lsu_dccm_ctl (
 	endgenerate
 endmodule
 module eb1_lsu_dccm_mem (
+	VPWR,
+	VGND,
 	clk,
 	active_clk,
 	rst_l,
@@ -20607,6 +20615,8 @@ module eb1_lsu_dccm_mem (
 		sv2v_cast_1 = inp;
 	endfunction
 	parameter [2270:0] pt = {232'h0808040001c0400000000000010102000060800080103c12160802000c, sv2v_cast_1(4'h0), 5'h01, 5'h01, 6'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 7'h02, 9'h00c, 7'h04, 10'h020, 7'h07, 5'h01, 10'h027, 8'h08, 9'h004, 8'h0f, 36'h0f0040000, 14'h0004, 6'h02, 7'h03, 5'h01, 7'h05, 9'h001, 6'h02, 8'h01, 5'h01, 5'h01, 7'h01, 7'h03, 6'h03, 8'h08, 7'h02, 8'h05, 8'h03, 5'h01, 18'h00200, 7'h04, 11'h040, 5'h01, 5'h00, 11'h047, 9'h00c, 11'h040, 8'h08, 8'h02, 8'h02, 7'h02, 5'h00, 8'h06, 13'h0010, 7'h01, 5'h01, 17'h00080, 7'h06, 9'h00d, 8'h02, 8'h02, 5'h01, 7'h02, 9'h003, 9'h004, 9'h00c, 5'h01, 5'h00, 8'h08, 9'h004, 5'h01, 8'h0a, 36'h0affff000, 14'h0004, 5'h01, 6'h02, 8'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 5'h00, 5'h00, 5'h01, 6'h02, 8'h03, 9'h004, 7'h02, 9'h00c, 8'h04, 5'h00, 5'h00, 36'h0f00c0000, 9'h00f, 8'h01, 8'h0f, 13'h0020, 12'h01f, 13'h0020, 8'h08, 5'h01, 6'h02, 8'h01, 5'h01};
+	input wire VPWR;
+	input wire VGND;
 	input wire clk;
 	input wire active_clk;
 	input wire rst_l;
@@ -20779,8 +20789,8 @@ module eb1_lsu_dccm_mem (
 			end
 			else if (DCCM_INDEX_DEPTH == 1024) begin : dccm
 				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
-					.VPWR(VPWR),
-    					.VGND(VGND),
+					.vccd1(VPWR),
+					.vssd1(VGND),
 					.clk0(clk),
 					.csb0(~dccm_clken[i]),
 					.web0(~wren_bank[i]),
@@ -20790,7 +20800,7 @@ module eb1_lsu_dccm_mem (
 					.dout0(dccm_bank_dout[i * pt[1360-:10]+:pt[1360-:10]]),
 					.clk1(clk),
 					.csb1(1'b1),
-					.addr1(10'h000),
+					.addr1(8'h00),
 					.dout1()
 				);
 			end
@@ -20817,8 +20827,8 @@ module eb1_lsu_dccm_mem (
 			end
 			else if (DCCM_INDEX_DEPTH == 256) begin : dccm
 				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
-					.VPWR(VPWR),
-    					.VGND(VGND),
+					.vccd1(VPWR),
+					.vssd1(VGND),
 					.clk0(clk),
 					.csb0(~dccm_clken[i]),
 					.web0(~wren_bank[i]),
@@ -20828,7 +20838,7 @@ module eb1_lsu_dccm_mem (
 					.dout0(dccm_bank_dout[(i * pt[1360-:10]) + 31-:32]),
 					.clk1(clk),
 					.csb1(1'b1),
-					.addr1(10'h000),
+					.addr1(8'h00),
 					.dout1()
 				);
 			end
