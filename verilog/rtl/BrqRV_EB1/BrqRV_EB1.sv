@@ -1213,8 +1213,8 @@ parameter eb1_param_t pt = '{
 	TIMER_LEGAL_EN         : 5'h01         
 })
 (
-   input logic			             vccd1,
-   input logic				     vssd1,
+   input logic			             VPWR,
+   input logic				     VGND,
    input logic                             clk,
    input logic                             rst_l,
    input logic                             dbg_rst_l,
@@ -1234,7 +1234,7 @@ parameter eb1_param_t pt = '{
    output logic [31:0]                     trace_rv_i_tval_ip,
 
    // Bus signals
-`ifdef RV_BUILD_AXI4
+
    //-------------------------- LSU AXI signals--------------------------
    // AXI Write Channels
    output logic                            lsu_axi_awvalid,
@@ -1415,7 +1415,7 @@ parameter eb1_param_t pt = '{
    output logic [63:0]                     dma_axi_rdata,
    output logic [1:0]                      dma_axi_rresp,
    output logic                            dma_axi_rlast,
-`endif
+
 
 `ifdef RV_BUILD_AHB_LITE
  //// AHB LITE BUS
@@ -3966,8 +3966,8 @@ parameter eb1_param_t pt = '{
 })
 (
 
-   input logic         vccd1,
-   input logic		vssd1,
+   input logic         VPWR,
+   input logic		VGND,
    input logic         clk,
    input logic         rst_l,
    input logic         dccm_clk_override,
@@ -18901,7 +18901,7 @@ parameter eb1_param_t pt = '{
    // Performance debug info
    //
    //
-`ifdef DUMP_BTB_ON
+/*`ifdef DUMP_BTB_ON
    logic              exu_mp_valid; // conditional branch mispredict
    logic exu_mp_way; // conditional branch mispredict
    logic exu_mp_ataken; // direction is actual taken
@@ -18969,6 +18969,7 @@ parameter eb1_param_t pt = '{
 
    endfunction
 `endif
+*/
 endmodule // eb1_ifu
 
 //********************************************************************************
@@ -21650,10 +21651,10 @@ parameter eb1_param_t pt = '{
 	SB_BUS_TAG             : 8'h01         ,
 	TIMER_LEGAL_EN         : 5'h01         
 })(
- `ifdef USE_POWER_PINS
-   input logic 					vccd1,
-   input logic						vssd1,
- `endif
+
+   input logic 					VPWR,
+   input logic						VGND,
+   
    input logic                                        clk,                                 // Clock only while core active.  Through one clock header.  For flops with    second clock header built in.  Connected to ACTIVE_L2CLK.
    input logic                                        active_clk,                          // Clock only while core active.  Through two clock headers. For flops without second clock header built in.
    input logic                                        rst_l,                               // reset, active low
@@ -21811,10 +21812,8 @@ parameter eb1_param_t pt = '{
 
                                       );*/
                                       sky130_sram_1kbyte_1rw1r_32x256_8 sram(
-    									`ifdef USE_POWER_PINS
-    									.vccd1(vccd1),
-    									.vssd1(vssd1),
-    									`endif
+    									.vccd1(VPWR),
+    									.vssd1(VGND),
 									.clk0(clk),
 									.csb0(~iccm_clken[i]),
 									.web0(~wren_bank[i]),
@@ -21874,10 +21873,10 @@ parameter eb1_param_t pt = '{
                                      );*/
                                      
                                      sky130_sram_1kbyte_1rw1r_32x256_8 sram(
-    									`ifdef USE_POWER_PINS
-    									.vccd1(vccd1),
-    									.vssd1(vssd1),
-    									`endif
+    									
+    									.vccd1(VPWR),
+    									.vssd1(VGND),
+    									
 									.clk0(clk),
 									.csb0(~iccm_clken[i]),
 									.web0(~wren_bank[i]),
@@ -27937,10 +27936,10 @@ parameter eb1_param_t pt = '{
 	SB_BUS_TAG             : 8'h01         ,
 	TIMER_LEGAL_EN         : 5'h01         
 })(
-`ifdef USE_POWER_PINS
-   input logic 	vccd1,
-   input logic		vssd1,
- `endif
+
+   input logic 	VPWR,
+   input logic		VGND,
+
    input logic         clk,                                             // Clock only while core active.  Through one clock header.  For flops with    second clock header built in.  Connected to ACTIVE_L2CLK.
    input logic         active_clk,                                      // Clock only while core active.  Through two clock headers. For flops without second clock header built in.
    input logic         rst_l,                                           // reset, active low
@@ -28115,10 +28114,10 @@ parameter eb1_param_t pt = '{
                                  );
                                  */
                                  sky130_sram_1kbyte_1rw1r_32x256_8 sram(
-    									`ifdef USE_POWER_PINS
-    									.vccd1(vccd1),
-    									.vssd1(vssd1),
-    									`endif
+    									
+    									.vccd1(VPWR),
+    									.vssd1(VGND),
+    									
 									.clk0(clk),
 									.csb0(~dccm_clken[i]),
 									.web0(~wren_bank[i]),
@@ -28162,10 +28161,10 @@ parameter eb1_param_t pt = '{
                                 .*
                                 );*/
                                 sky130_sram_1kbyte_1rw1r_32x256_8 sram(
-    									`ifdef USE_POWER_PINS
-    									.vccd1(vccd1),
-    									.vssd1(vssd1),
-    									`endif
+    									
+    									.vccd1(VPWR),
+    									.vssd1(VGND),
+    									
 									.clk0(clk),
 									.csb0(~dccm_clken[i]),
 									.web0(~wren_bank[i]),
@@ -31565,7 +31564,7 @@ module rvclkhdr
    logic   SE;
    assign       SE = 0;
 
-   sky130_fd_sc_hd__dlclkp_1 clkhdr( .CLK(clk), .GCLK(l1clk), .GATE(en)); /*clkhdr ( .*, .EN(en), .CK(clk), .Q(l1clk));*/
+   sky130_fd_sc_hd__dlclkp_1 clkhdr( .VPWR(1'b1), .VGND(1'b0), .CLK(clk), .GCLK(l1clk), .GATE(en)); /*clkhdr ( .*, .EN(en), .CK(clk), .Q(l1clk));*/
 
 endmodule // rvclkhdr
 
@@ -31582,7 +31581,7 @@ module rvoclkhdr
    assign       SE = 0;
 
 
-   sky130_fd_sc_hd__dlclkp_1 clkhdr( .CLK(clk), .GCLK(l1clk), .GATE(en)); //clkhdr ( .*, .EN(en), .CK(clk), .Q(l1clk));
+   sky130_fd_sc_hd__dlclkp_1 clkhdr( .VPWR(1'b1), .VGND(1'b0), .CLK(clk), .GCLK(l1clk), .GATE(en)); //clkhdr ( .*, .EN(en), .CK(clk), .Q(l1clk));
 
 
 endmodule

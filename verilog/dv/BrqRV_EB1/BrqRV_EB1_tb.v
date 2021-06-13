@@ -75,17 +75,20 @@ module BrqRV_EB1_tb();
             wait(mprj_io_0 == 28'h0375F00);
             */
             // Observe Output pins [35:8] for prime_num
-	    wait(mprj_io_0 == 28'd1);
+	    /*wait(mprj_io_0 == 28'd1);
 	    wait(mprj_io_0 == 28'd3);
 	    wait(mprj_io_0 == 28'd5);
     	    wait(mprj_io_0 == 28'd7);
 	    wait(mprj_io_0 == 28'd11);
-            wait(mprj_io_0 == 28'd13);
-	    //wait(mprj_io_0 == 28'h00013B0);
-            //wait(mprj_io_0 == 28'h0009D80);
-	    //wait(mprj_io_0 == 28'h0058980);
-            //wait(mprj_io_0 == 28'h0375F00);
-            $display("MPRJ-IO state = %h ", mprj_io[35:8]);  
+            wait(mprj_io_0 == 28'd13);*/
+            // Observe Output pins [35:8] for multliplication_table
+            wait(mprj_io_0 == 28'd5);
+            wait(mprj_io_0 == 28'd10);
+            wait(mprj_io_0 == 28'd15);
+            wait(mprj_io_0 == 28'd20);
+            wait(mprj_io_0 == 28'd25);
+            wait(mprj_io_0 == 28'd30);
+            $display("MPRJ-IO state = %d ", mprj_io[35:8]);  
 		
 		`ifdef GL
 	    	$display("Monitor: Test 1 Mega-Project IO (GL) Passed");
@@ -121,7 +124,7 @@ module BrqRV_EB1_tb();
 	end
 	
 	always @(mprj_io) begin
-		#1 $display("MPRJ-IO state = %h ", mprj_io[35:8]);
+		#1 $display("MPRJ-IO state = %d ", mprj_io[35:8]);
 	end
 	
 	wire flash_csb;
