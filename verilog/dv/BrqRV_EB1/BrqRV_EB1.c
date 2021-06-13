@@ -56,7 +56,7 @@ void main()
   reg_la1_oenb = reg_la1_iena =  0x00000000;
   reg_la1_data = 0x00000015C; // Clk_per_bit
   
-  reg_la0_oenb = reg_la0_iena = 0x00000000;
+  reg_la0_oenb = reg_la0_iena = 0x00000002;
   reg_la0_data = 0x00000000;
   reg_mprj_datah = 0x20;
 

@@ -117,7 +117,7 @@ module user_proj_example #(
     assign clk = (~la_oenb[65]) ? la_data_in[65] :  wb_clk_i;
     //assign clk = wb_clk_i;
     assign rst = (~la_oenb[64]) ? la_data_in[64] : ~wb_rst_i;
-    assign rx_i = io_in[5];
+    assign rx_i = (~la_oenb[1]) ? la_data_in[1] : io_in[5];
     assign reset_vector = 32'haffff000;
     assign jtag_id[31:28] = 4'b1;
     assign jtag_id[27:12] = {16{1'b0}};
