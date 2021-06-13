@@ -47,9 +47,10 @@ This repository contains the brqrv eb1 Core design RTL. Brqrv Eb1 Is A Machine-M
 
 ### Testing of Design
 
-1.Go to verilog/dv/BrqRV_EB1/ directory
+Go to verilog/dv/BrqRV_EB1/ directory
 
 1. Set the GCC_PATH environment variable.
 2. Set the PDK_PATH environment variable.
-3. run the make commad for RTL simulation
-4. run the SIM=GL make command for netlist simulation
+3. Copy the given program hex file into uart.hex. 
+4. run the make commad for RTL simulation
+5. run the SIM=GL make command for netlist simulation
