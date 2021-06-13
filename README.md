@@ -25,7 +25,8 @@ This repository contains the brqrv eb1 Core design RTL. Brqrv Eb1 Is A Machine-M
     ├── verlog                               #   User verilog Directory
     │   ├── dv                               #   Design Verification
     │       ├── BrqRV_EB1                    #   Design Test Directory
-    │       ├── hex                          #   Hex file folder
+    │       ├── hex                          #   Hex files folder
+    │       ├── asm                          #   Assmebly files folder
      
   # The synthesized netlist is present here:
   
@@ -54,3 +55,5 @@ Go to verilog/dv/BrqRV_EB1/ directory
 3. Copy the given program hex file into uart.hex. 
 4. run the make commad for RTL simulation
 5. run the SIM=GL make command for netlist simulation
+
+Note: Dont forget to add 0x00000FFF instruction in the end of the uart.hex to stop the uart transmission if you are using your own codes.
