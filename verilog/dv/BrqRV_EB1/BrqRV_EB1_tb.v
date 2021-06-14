@@ -91,9 +91,18 @@ module BrqRV_EB1_tb();
             wait(mprj_io_0 == 28'd30);
             */
             // Observe Output pins [35:8] for mean & Determinant
-            wait(mprj_io_0 == 28'd5);
-            //wait(mprj_io_0 == 28'd7);
+            //wait(mprj_io_0 == 28'd5);
             
+            // Observe Output pins [35:8] for power
+            //wait(mprj_io_0 == 28'd64);
+            
+            // Observe Output pins [35:8] for flip number
+            //wait(mprj_io_0 == 28'd4889874);
+            
+            // Observe Output pins [35:8] for Queue 
+            wait(mprj_io_0 == 28'd5);
+            wait(mprj_io_0 == 28'd6);
+            wait(mprj_io_0 == 28'd7);
             $display("MPRJ-IO state = %d ", mprj_io[35:8]);  
 		
 		`ifdef GL

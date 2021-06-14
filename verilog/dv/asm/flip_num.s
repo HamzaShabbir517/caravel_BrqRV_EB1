@@ -9,14 +9,14 @@ _start:
 
 //Prime numbers in a given range 
 
-// li x1, 0x5f555555
-// csrw 0x7c0, x1
+
 
 csrw minstret, zero
 csrw minstreth, zero
- 
-//li x4, 4        // Neccessary for terminating code
-//csrw 0x7f9 ,x4  // Neccessary for terminating code
+li x1, 0x5f555555
+csrw 0x7c0, x1 
+li x4, 4        // Neccessary for terminating code
+csrw 0x7f9 ,x4  // Neccessary for terminating code
 
 
 

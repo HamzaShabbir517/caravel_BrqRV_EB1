@@ -14,7 +14,7 @@ li x1, 0x5f555555
 csrw 0x7c0, x1
 li x1, 4
 csrw 0x7f9, x1
-
+nop
 
 li x8,0xf0040000	//For Load
 li x19,STDOUT		//B.addr

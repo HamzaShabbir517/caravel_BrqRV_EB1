@@ -14,19 +14,20 @@ li x1, 0x5f555555
 csrw 0x7c0, x1
 li x1, 4
 csrw 0x7f9, x1
+nop
 
 li x8,0xf0040000	//For Load
 li x19,STDOUT		//B.addr
 
 li x5,4  // Base number
 sb x5,0(x8)
-li x5,4  // Base number
-sb x5,1(x8)
+//li x5,4  // Base number
+//sb x5,4(x8)
 li x5,3	 // power number
-sb x5,2(x8)
+sb x5,4(x8)
 lb x5,0(x8)
-lb x6,1(x8)
-lb x7,2(x8)
+lb x6,0(x8)
+lb x7,4(x8)
 addi x7,x7,-1
 loop:
 mul x6,x6,x5

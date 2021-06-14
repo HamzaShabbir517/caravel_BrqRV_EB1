@@ -38,9 +38,11 @@ _start:
 
      li x4, 4        // Neccessary for terminating code
      csrw 0x7f9 ,x4  // Neccessary for terminating code
-  
+     
+     
+     
      li s0, 0xf0040000  //dccm base address
-     li s5,0xf0040100 //Queue Adress  
+     //li s5,0xf0040100 //Queue Adress  
 
      addi s1,x0,5 //element 1 to push  INPUT   expected output should be 5 6 7 
      addi s2,x0,6 //element 2 to push  INPUT
@@ -65,28 +67,41 @@ _start:
      ret
      
      PUSH1:
-     sb s1,0(s5) // save element 1 on first location of queue
+     sw s1,0(s0) // save element 1 on first location of queue
      j PUSH      // jump to push function
 
      PUSH2:     
-     sb s2,4(s5) // save element 2 on second location of queue
+     sw s2,4(s0) // save element 2 on second location of queue
      j PUSH
 
      PUSH3:
-     sb s3,8(s5) // save element 3 on third location of queue
+     sw s3,8(s0) // save element 3 on third location of queue
      j PUSH
 
      LOAD_QUEUE:
 
-     lb x5,0(s5) 
-     lb x6,4(s5)
-     lb x7,8(s5)
+     lw x5,0(s0) 
+     lw x6,4(s0)
+     lw x7,8(s0)
      
      li s6,STDOUT
 
-     sb x5,0(s6)  //Sending element 1 to tb 
-     sb x6,4(s6)  //Sending element 2 to tb
-     sb x7,8(s6)  //Sending element 3 to tb
+     sw x5,0(s6)  //Sending element 1 to tb
+     addi s6, s6, 4
+     nop
+     nop
+     nop 
+     nop
+     sw x6,0(s6)  //Sending element 2 to tb
+     addi s6, s6, 4
+     nop
+     nop
+     nop
+     sw x7,0(s6)  //Sending element 3 to tb
+     nop
+     nop
+     nop
+     
 
 
 
