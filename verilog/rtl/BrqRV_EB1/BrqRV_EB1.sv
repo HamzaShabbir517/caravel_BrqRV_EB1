@@ -1213,8 +1213,10 @@ parameter eb1_param_t pt = '{
 	TIMER_LEGAL_EN         : 5'h01         
 })
 (
-   input logic			             VPWR,
-   input logic				     VGND,
+//`ifdef USE_POWER_PINS
+   inout logic			             VPWR,
+   inout logic				     VGND,
+//`endif
    input logic                             clk,
    input logic                             rst_l,
    input logic                             dbg_rst_l,
@@ -3965,9 +3967,10 @@ parameter eb1_param_t pt = '{
 	TIMER_LEGAL_EN         : 5'h01         
 })
 (
-
-   input logic         VPWR,
-   input logic		VGND,
+//`ifdef USE_POWER_PINS
+   inout logic         VPWR,
+   inout logic		VGND,
+//`endif
    input logic         clk,
    input logic         rst_l,
    input logic         dccm_clk_override,
@@ -21651,10 +21654,10 @@ parameter eb1_param_t pt = '{
 	SB_BUS_TAG             : 8'h01         ,
 	TIMER_LEGAL_EN         : 5'h01         
 })(
-
-   input logic 					VPWR,
-   input logic						VGND,
-   
+//`ifdef USE_POWER_PINS 
+   inout logic 					VPWR,
+   inout logic						VGND,
+//`endif
    input logic                                        clk,                                 // Clock only while core active.  Through one clock header.  For flops with    second clock header built in.  Connected to ACTIVE_L2CLK.
    input logic                                        active_clk,                          // Clock only while core active.  Through two clock headers. For flops without second clock header built in.
    input logic                                        rst_l,                               // reset, active low
@@ -21812,8 +21815,10 @@ parameter eb1_param_t pt = '{
 
                                       );*/
                                       sky130_sram_1kbyte_1rw1r_32x256_8 sram(
+                                      				//`ifdef USE_POWER_PINS
     									.vccd1(VPWR),
     									.vssd1(VGND),
+    									//`endif
 									.clk0(clk),
 									.csb0(~iccm_clken[i]),
 									.web0(~wren_bank[i]),
@@ -21873,10 +21878,10 @@ parameter eb1_param_t pt = '{
                                      );*/
                                      
                                      sky130_sram_1kbyte_1rw1r_32x256_8 sram(
-    									
+    									//`ifdef USE_POWER_PINS
     									.vccd1(VPWR),
     									.vssd1(VGND),
-    									
+    									//`endif
 									.clk0(clk),
 									.csb0(~iccm_clken[i]),
 									.web0(~wren_bank[i]),
@@ -27936,10 +27941,10 @@ parameter eb1_param_t pt = '{
 	SB_BUS_TAG             : 8'h01         ,
 	TIMER_LEGAL_EN         : 5'h01         
 })(
-
-   input logic 	VPWR,
-   input logic		VGND,
-
+//`ifdef USE_POWER_PINS
+   inout logic 	VPWR,
+   inout logic		VGND,
+//`endif
    input logic         clk,                                             // Clock only while core active.  Through one clock header.  For flops with    second clock header built in.  Connected to ACTIVE_L2CLK.
    input logic         active_clk,                                      // Clock only while core active.  Through two clock headers. For flops without second clock header built in.
    input logic         rst_l,                                           // reset, active low
@@ -28114,10 +28119,10 @@ parameter eb1_param_t pt = '{
                                  );
                                  */
                                  sky130_sram_1kbyte_1rw1r_32x256_8 sram(
-    									
+    									//`ifdef USE_POWER_PINS
     									.vccd1(VPWR),
     									.vssd1(VGND),
-    									
+    									//`endif
 									.clk0(clk),
 									.csb0(~dccm_clken[i]),
 									.web0(~wren_bank[i]),
@@ -28161,10 +28166,10 @@ parameter eb1_param_t pt = '{
                                 .*
                                 );*/
                                 sky130_sram_1kbyte_1rw1r_32x256_8 sram(
-    									
+    									//`ifdef USE_POWER_PINS
     									.vccd1(VPWR),
     									.vssd1(VGND),
-    									
+    									//`endif
 									.clk0(clk),
 									.csb0(~dccm_clken[i]),
 									.web0(~wren_bank[i]),
@@ -31564,7 +31569,7 @@ module rvclkhdr
    logic   SE;
    assign       SE = 0;
 
-   sky130_fd_sc_hd__dlclkp_1 clkhdr( .VPWR(1'b1), .VGND(1'b0), .CLK(clk), .GCLK(l1clk), .GATE(en)); /*clkhdr ( .*, .EN(en), .CK(clk), .Q(l1clk));*/
+   sky130_fd_sc_hd__dlclkp_1 clkhdr( .CLK(clk), .GCLK(l1clk), .GATE(en)); /*clkhdr ( .*, .EN(en), .CK(clk), .Q(l1clk));*/
 
 endmodule // rvclkhdr
 
@@ -31581,7 +31586,7 @@ module rvoclkhdr
    assign       SE = 0;
 
 
-   sky130_fd_sc_hd__dlclkp_1 clkhdr( .VPWR(1'b1), .VGND(1'b0), .CLK(clk), .GCLK(l1clk), .GATE(en)); //clkhdr ( .*, .EN(en), .CK(clk), .Q(l1clk));
+   sky130_fd_sc_hd__dlclkp_1 clkhdr( .CLK(clk), .GCLK(l1clk), .GATE(en)); //clkhdr ( .*, .EN(en), .CK(clk), .Q(l1clk));
 
 
 endmodule
