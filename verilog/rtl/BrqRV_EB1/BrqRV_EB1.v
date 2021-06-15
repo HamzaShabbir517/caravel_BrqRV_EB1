@@ -15308,7 +15308,7 @@ module eb1_ifu_iccm_mem (
 					.dout0(iccm_bank_dout[(i * 39) + 31-:32]),
 					.clk1(clk),
 					.csb1(1'b1),
-					.addr1(10'h000),
+					.addr1(8'h00),
 					.dout1()
 				);
 			end
@@ -15347,7 +15347,7 @@ module eb1_ifu_iccm_mem (
 					.dout0(iccm_bank_dout[i * 39+:39]),
 					.clk1(clk),
 					.csb1(1'b1),
-					.addr1(10'h000),
+					.addr1(8'h00),
 					.dout1()
 				);
 			end
@@ -20828,7 +20828,7 @@ module eb1_lsu_dccm_mem (
 					.dout0(dccm_bank_dout[i * pt[1360-:10]+:pt[1360-:10]]),
 					.clk1(clk),
 					.csb1(1'b1),
-					.addr1(10'h000),
+					.addr1(8'h00),
 					.dout1()
 				);
 			end
@@ -20868,7 +20868,7 @@ module eb1_lsu_dccm_mem (
 					.dout0(dccm_bank_dout[(i * pt[1360-:10]) + 31-:32]),
 					.clk1(clk),
 					.csb1(1'b1),
-					.addr1(10'h000),
+					.addr1(8'h00),
 					.dout1()
 				);
 			end
@@ -22972,6 +22972,8 @@ module rvclkhdr (
 	wire SE;
 	assign SE = 0;
 	sky130_fd_sc_hd__dlclkp_1 clkhdr(
+		.VPWR(1'b1),
+		.VGND(1'b0),
 		.CLK(clk),
 		.GCLK(l1clk),
 		.GATE(en)
@@ -22990,6 +22992,8 @@ module rvoclkhdr (
 	wire SE;
 	assign SE = 0;
 	sky130_fd_sc_hd__dlclkp_1 clkhdr(
+		.VPWR(1'b1),
+		.VGND(1'b0),
 		.CLK(clk),
 		.GCLK(l1clk),
 		.GATE(en)
