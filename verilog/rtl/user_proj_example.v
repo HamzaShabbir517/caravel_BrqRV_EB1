@@ -70,7 +70,17 @@ module user_proj_example #(
     input  [`MPRJ_IO_PADS-1:0] io_in,
     output [`MPRJ_IO_PADS-1:0] io_out,
     output [`MPRJ_IO_PADS-1:0] io_oeb,
-
+ 
+    
+    // Analog (direct connection to GPIO pad---use with caution)
+    // Note that analog I/O is not available on the 7 lowest-numbered
+    // GPIO pads, and so the analog_io indexing is offset from the
+    // GPIO indexing by 7 (also upper 2 GPIOs do not have analog_io).
+    inout [`MPRJ_IO_PADS-10:0] analog_io,
+    
+    // Independent clock (on independent integer divider)
+    input   user_clock2,
+    
     // IRQ
     output [2:0] irq
 );
@@ -90,6 +100,7 @@ module user_proj_example #(
     wire [63:0]	lsu_axi_wdata;
     wire [7:0]         lsu_axi_wstrb;
     reg		lsu_axi_bvalid;
+    reg  [2:0]	        lsu_axi_bid;
 
 
     // WB MI A
@@ -101,11 +112,14 @@ module user_proj_example #(
     assign io_out[35:8] = (| lsu_axi_wstrb[3:0]) ? lsu_axi_wdata[27:0] : (| lsu_axi_wstrb[7:4]) ? lsu_axi_wdata[59:32] : {28{1'b0}};
     
     assign io_oeb[35:8] = {28{~lsu_axi_wvalid}};
-    assign io_oeb[7:0] = {8{~rst}};
-    assign io_oeb[37:36] = {2{~rst}};
+    assign io_oeb[3:0]  = 4'hf;
+    assign io_oeb[4]    = 1'b0;
+    assign io_oeb[6:5]  = 2'b01;
+    assign io_oeb[7]    = 1'b0;
     
     always @(posedge wb_clk_i) begin
     	lsu_axi_bvalid = (lsu_axi_wvalid) ? 1'b1 : 1'b0;
+    	lsu_axi_bid    = (| lsu_axi_wstrb[3:0]) ? 3'b000 : (| lsu_axi_wstrb[7:4]) ? 3'b001 : 3'b000;
     end
     // IRQ
     assign irq = 3'b000;	// Unused
@@ -115,7 +129,6 @@ module user_proj_example #(
 
     // Assuming LA probes [65:64] are for controlling the count clk & reset  
     assign clk = (~la_oenb[65]) ? la_data_in[65] :  wb_clk_i;
-    //assign clk = wb_clk_i;
     assign rst = (~la_oenb[64]) ? la_data_in[64] : ~wb_rst_i;
     assign rx_i = (~la_oenb[1]) ? la_data_in[1] : io_in[5];
     assign reset_vector = 32'haffff000;
@@ -232,7 +245,7 @@ eb1_brqrv_wrapper brqrv_top (
     .lsu_axi_bvalid         (lsu_axi_bvalid),
     .lsu_axi_bready         (),
     .lsu_axi_bresp          (2'b00),
-    .lsu_axi_bid            (3'b000),
+    .lsu_axi_bid            (lsu_axi_bid),
 
 
     .lsu_axi_arvalid        (),
@@ -404,11 +417,11 @@ eb1_brqrv_wrapper brqrv_top (
     .trace_rv_i_interrupt_ip(),
     .trace_rv_i_tval_ip     (),
 
-    .jtag_tck               ( (io_oeb[0]) ? io_in[0] : 1'b0 ),
-    .jtag_tms               ( (io_oeb[1]) ? io_in[1] : 1'b0 ),
-    .jtag_tdi               ( (io_oeb[3]) ? io_in[3] : 1'b0 ),
-    .jtag_trst_n            ( (io_oeb[2]) ? io_in[2] : 1'b0  ),
-    .jtag_tdo               ( io_out[4]  ),
+    .jtag_tck               ( io_in[0] ),
+    .jtag_tms               ( io_in[1] ),
+    .jtag_tdi               ( io_in[3] ),
+    .jtag_trst_n            ( io_in[2] ),
+    .jtag_tdo               ( io_out[4]),
 
     .mpc_debug_halt_ack     ( ),
     .mpc_debug_halt_req     ( 1'b0),
