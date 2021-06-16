@@ -22,9 +22,7 @@
     // Assume default net type to be wire because GL netlists don't have the wire definitions
     `default_nettype wire
     `include "gl/user_project_wrapper.v"
-    //`include "gl/user_proj_example.v"
-    `include "powered_netlist.v"
-    `include "BrqRV_EB1/sky130_sram_1kbyte_1rw1r_32x256_8.v"
+    `include "gl/user_proj_example.v"
 `else
     `include "user_project_wrapper.v"
     `include "powered_netlist.v"

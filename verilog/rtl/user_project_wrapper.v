@@ -119,6 +119,12 @@ user_proj_example mprj (
     .io_in (io_in),
     .io_out(io_out),
     .io_oeb(io_oeb),
+    
+    // analog
+    .analog_io(analog_io),
+    
+    // Independent clock
+    .user_clock2(user_clock2),
 
     // IRQ
     .irq(user_irq)
