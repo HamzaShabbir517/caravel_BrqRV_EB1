@@ -100,7 +100,7 @@ module user_proj_example #(
     wire [63:0]	lsu_axi_wdata;
     wire [7:0]         lsu_axi_wstrb;
     reg		lsu_axi_bvalid;
-    reg  [2:0]	        lsu_axi_bid;
+    //reg  [2:0]	        lsu_axi_bid;
 
 
     // WB MI A
@@ -119,7 +119,7 @@ module user_proj_example #(
     
     always @(posedge wb_clk_i) begin
     	lsu_axi_bvalid = (lsu_axi_wvalid) ? 1'b1 : 1'b0;
-    	lsu_axi_bid    = (| lsu_axi_wstrb[3:0]) ? 3'b000 : (| lsu_axi_wstrb[7:4]) ? 3'b001 : 3'b000;
+    	//lsu_axi_bid    = (| lsu_axi_wstrb[3:0]) ? 3'b000 : (| lsu_axi_wstrb[7:4]) ? 3'b001 : 3'b000;
     end
     // IRQ
     assign irq = 3'b000;	// Unused
@@ -245,7 +245,7 @@ eb1_brqrv_wrapper brqrv_top (
     .lsu_axi_bvalid         (lsu_axi_bvalid),
     .lsu_axi_bready         (),
     .lsu_axi_bresp          (2'b00),
-    .lsu_axi_bid            (lsu_axi_bid),
+    .lsu_axi_bid            (3'b000),
 
 
     .lsu_axi_arvalid        (),
