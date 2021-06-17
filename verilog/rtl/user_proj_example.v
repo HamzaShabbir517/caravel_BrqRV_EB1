@@ -82,7 +82,7 @@ module user_proj_example #(
     input   user_clock2,
     
     // IRQ
-    output [2:0] irq
+    output [2:0] user_irq
 );
     wire clk;
     wire rst;
@@ -122,7 +122,7 @@ module user_proj_example #(
     	//lsu_axi_bid    = (| lsu_axi_wstrb[3:0]) ? 3'b000 : (| lsu_axi_wstrb[7:4]) ? 3'b001 : 3'b000;
     end
     // IRQ
-    assign irq = 3'b000;	// Unused
+    assign user_irq = 3'b000;	// Unused
 
     // LA
     assign la_data_out = (| lsu_axi_wstrb[3:0]) ? {{(127-BITS){1'b0}}, lsu_axi_wdata[31:0]} : (| lsu_axi_wstrb[7:4]) ? {{(127-BITS){1'b0}}, lsu_axi_wdata[63:32]} : {128{1'b0}};

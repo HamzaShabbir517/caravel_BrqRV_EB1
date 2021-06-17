@@ -63,7 +63,7 @@ module BrqRV_EB1_tb();
 	initial begin
 	    wait(mprj_ready == 1'b1)
 	    // Observe Output pins [35:8] for factorial
-	    /*wait(mprj_io_0 == 28'h0000001);
+	    wait(mprj_io_0 == 28'h0000001);
 	    wait(mprj_io_0 == 28'h0000002);
 	    wait(mprj_io_0 == 28'h0000006);
     	    wait(mprj_io_0 == 28'h0000018);
@@ -73,23 +73,23 @@ module BrqRV_EB1_tb();
             wait(mprj_io_0 == 28'h0009D80);
 	    wait(mprj_io_0 == 28'h0058980);
             wait(mprj_io_0 == 28'h0375F00);
-            */
+            
             // Observe Output pins [35:8] for prime_num
 	    /*wait(mprj_io_0 == 28'd1);
 	    wait(mprj_io_0 == 28'd3);
 	    wait(mprj_io_0 == 28'd5);
     	    wait(mprj_io_0 == 28'd7);
 	    wait(mprj_io_0 == 28'd11);
-            wait(mprj_io_0 == 28'd13);*/
-            
+            wait(mprj_io_0 == 28'd13);
+            */
             // Observe Output pins [35:8] for multliplication_table
-            wait(mprj_io_0 == 28'd5);
+            /*wait(mprj_io_0 == 28'd5);
             wait(mprj_io_0 == 28'd10);
             wait(mprj_io_0 == 28'd15);
             wait(mprj_io_0 == 28'd20);
             wait(mprj_io_0 == 28'd25);
             wait(mprj_io_0 == 28'd30);
-            
+            */
             // Observe Output pins [35:8] for mean & Determinant
             //wait(mprj_io_0 == 28'd5);
             
