@@ -94,7 +94,7 @@ module BrqRV_EB1_tb();
             //wait(mprj_io_0 == 28'd5);
             
             // Observe Output pins [35:8] for power
-            wait(mprj_io_0 == 28'd64);
+            //wait(mprj_io_0 == 28'd64);
             
             // Observe Output pins [35:8] for flip number
             //wait(mprj_io_0 == 28'd4889874);
@@ -108,7 +108,7 @@ module BrqRV_EB1_tb();
             //wait(mprj_io_0 == 28'd5);
             
             // Observe Output pins [35:8] for counter / ascending / reverse
-           /* wait(mprj_io_0 == 28'd0);
+            wait(mprj_io_0 == 28'd0);
             wait(mprj_io_0 == 28'd1);
             wait(mprj_io_0 == 28'd2);
             wait(mprj_io_0 == 28'd3);
@@ -120,7 +120,7 @@ module BrqRV_EB1_tb();
             wait(mprj_io_0 == 28'd9);
             wait(mprj_io_0 == 28'd10);
             wait(mprj_io_0 == 28'd11);
-            */
+            
             //wait(mprj_io_0 == 28'd3);
             //wait(mprj_io_0 == 28'd2);
             //wait(mprj_io_0 == 28'd1);
