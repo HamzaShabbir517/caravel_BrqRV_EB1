@@ -63,7 +63,7 @@ module BrqRV_EB1_tb();
 	initial begin
 	    wait(mprj_ready == 1'b1)
 	    // Observe Output pins [35:8] for factorial
-	    wait(mprj_io_0 == 28'h0000001);
+	    /*wait(mprj_io_0 == 28'h0000001);
 	    wait(mprj_io_0 == 28'h0000002);
 	    wait(mprj_io_0 == 28'h0000006);
     	    wait(mprj_io_0 == 28'h0000018);
@@ -73,7 +73,7 @@ module BrqRV_EB1_tb();
             wait(mprj_io_0 == 28'h0009D80);
 	    wait(mprj_io_0 == 28'h0058980);
             wait(mprj_io_0 == 28'h0375F00);
-            
+            */
             // Observe Output pins [35:8] for prime_num
 	    /*wait(mprj_io_0 == 28'd1);
 	    wait(mprj_io_0 == 28'd3);
@@ -94,7 +94,7 @@ module BrqRV_EB1_tb();
             //wait(mprj_io_0 == 28'd5);
             
             // Observe Output pins [35:8] for power
-            //wait(mprj_io_0 == 28'd64);
+            wait(mprj_io_0 == 28'd64);
             
             // Observe Output pins [35:8] for flip number
             //wait(mprj_io_0 == 28'd4889874);
