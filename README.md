@@ -16,6 +16,8 @@ This repository contains the brqrv eb1 Core design RTL. Brqrv Eb1 Is A Machine-M
     
     ├── verlog                               #   User verilog Directory
     │   ├── rtl                              #   RTL
+    |       ├── user_project_wrapper.v       #   User Project Wrapper source file
+    |       ├── user_proj_example.v          #   User Project Example source file
     |       ├── Brqrv_EB1                    #   BrqRV_EB1 folder
     |           ├── Brqrv_EB1.v                                     #   BrqRV_EB1 source file
     |           ├── sky130_sram_1kbyte_1rw1r_32x256_8.v             #   1KB sram
@@ -32,18 +34,21 @@ This repository contains the brqrv eb1 Core design RTL. Brqrv Eb1 Is A Machine-M
   
     ├── verlog                               #   User verilog Directory
     │   ├── gl                               #   Gate Level Netlis
-    │       ├── BrqRV_EB1                    #   User Design Netlist
+    │       ├── user_project_wrapper.v       #   User Project Wrapper Netlist
+    │       ├── user_proj_example.v          #   User Project Example Netlist
     
  # The hardened macros are placed here:
 
     ├── def                                 #    def Directory
-    │   ├── BrqRV_EB1                       #    User Design def
+    │   ├── user_project_wrapper.def        #    User Project Wrapper def file
     
     ├── lef                                 #    lef Directory
-    │   ├── BrqRV_EB1                       #    User Design lef
+    │   ├── user_project_wrapper.lef        #    User Project Wrapper lef file
+    │   ├── user_proj_example.lef           #    User Project Example lef file
     
     ├── gds                                 #    gds Directory
-    │   ├── BrqRV_EB1                       #    User Design gds
+    │   ├── user_project_wrapper.gdz.gz     #    User Project Wrapper gds
+    │   ├── user_proj_example.gdz.gz        #    User Project Example gds
 
 
 ### Testing of Design
