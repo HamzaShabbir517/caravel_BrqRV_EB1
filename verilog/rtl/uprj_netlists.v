@@ -31,6 +31,7 @@
     //`include "../gl/user_proj_example.v"
    
   // for rtl verification
+    `include "user_project_wrapper.v"
     `include "user_proj_example.v"
     `include "BrqRV_EB1/BrqRV_EB1.v"
     
