@@ -1,6 +1,6 @@
 ---
 project:
-  description: "A template SoC for Google sponsored Open MPW shuttles for SKY130."
+  description: "A Small SoC for Google sponsored Open MPW shuttles for SKY130."
   foundry: "SkyWater"
   git_url: "https://github.com/HamzaShabbir517/caravel_BrqRV_EB1.git"
   organization: "Micro Electronics Research Lab (MERL)"

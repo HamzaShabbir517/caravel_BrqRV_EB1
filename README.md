@@ -1,6 +1,6 @@
 # BrqRV EB1 RISC-V Core 1.0 from MERL
 
-This repository contains the brqrv eb1 Core design RTL. Brqrv Eb1 Is A Machine-Mode (M-Mode) Only, 32-Bit Cpu Small Core Which Supports Risc-V’s Integer (I), Compressed Instruction (C), Multiplication And Division (M), And Instruction-Fetch Fence, And Csr Extensions. The Core Contains A 4-Stage, Scalar, In-Order Pipeline
+This repository contains the BrqRV EB1 Core design RTL. BrqRV EB1 Is A Machine-Mode (M-Mode) Only, 32-Bit Cpu Small Core Which Supports Risc-V’s Integer (I), Compressed Instruction (C), Multiplication And Division (M), And Instruction-Fetch Fence, And Csr Extensions. The Core Contains A 4-Stage, Scalar, In-Order Pipeline
 
 ## Block Diagram
 ![](docs/BrqRV_EB1.png)
@@ -61,4 +61,4 @@ Go to verilog/dv/BrqRV_EB1/ directory
 4. run the make commad for RTL simulation
 5. run the SIM=GL make command for netlist simulation
 
-Note: Dont forget to add 0x00000FFF instruction in the end of the uart.hex to stop the uart transmission if you are using your own codes.
+Note: Dont forget to add 00000FFF instruction in the end of the uart.hex to stop the uart transmission if you are using your own codes.
