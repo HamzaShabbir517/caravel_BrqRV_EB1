@@ -22990,8 +22990,6 @@ module rvclkhdr (
 	wire SE;
 	assign SE = 0;
 	sky130_fd_sc_hd__dlclkp_1 clkhdr(
-		.VPWR(1'b1),
-		.VGND(1'b0),
 		.CLK(clk),
 		.GCLK(l1clk),
 		.GATE(en)
@@ -23010,8 +23008,6 @@ module rvoclkhdr (
 	wire SE;
 	assign SE = 0;
 	sky130_fd_sc_hd__dlclkp_1 clkhdr(
-		.VPWR(1'b1),
-		.VGND(1'b0),
 		.CLK(clk),
 		.GCLK(l1clk),
 		.GATE(en)
