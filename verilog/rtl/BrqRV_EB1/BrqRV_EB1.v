@@ -15312,7 +15312,7 @@ module eb1_ifu_iccm_mem (
 				);
 			end
 			else if (pt[917-:8] == 8) begin : iccm
-				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
+				/*sky130_sram_1kbyte_1rw1r_32x256_8 sram(
 					`ifdef USE_POWER_PINS 
 					.vccd1(VPWR),
 					.vssd1(VGND),
@@ -15328,7 +15328,21 @@ module eb1_ifu_iccm_mem (
 					.csb1(1'b1),
 					.addr1(8'h00),
 					.dout1()
-				);
+				);*/
+				DFFRAM iccm
+					(
+					`ifdef USE_POWER_PINS
+    					 .VPWR(VPWR),
+    					 .VGND(VGND),
+					 `endif
+    					 .CLK(clk),
+    					 .WE({4{wren_bank[i]}}),
+    					 .EN(iccm_clken[i]),
+    					 .Di(iccm_bank_wr_data[(i * 39) + 31-:32]),
+    					 .Do(iccm_bank_dout[(i * 39) + 31-:32]),
+    					 .A(addr_bank[((pt[936-:9] - 1) >= pt[945-:9] ? pt[945-:9] : pt[936-:9] - 1) + (i * ((pt[936-:9] - 1) >= pt[945-:9] ? ((pt[936-:9] - 1) - pt[945-:9]) + 1 : (pt[945-:9] - (pt[936-:9] - 1)) + 1))+:((pt[936-:9] - 1) >= pt[945-:9] ? ((pt[936-:9] - 1) - pt[945-:9]) + 1 : (pt[945-:9] - (pt[936-:9] - 1)) + 1)])
+					);
+					
 			end
 			else if (pt[917-:8] == 9) begin : iccm
 				ram_512x39 iccm_bank(
@@ -20872,7 +20886,7 @@ module eb1_lsu_dccm_mem (
 				);
 			end
 			else if (DCCM_INDEX_DEPTH == 256) begin : dccm
-				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
+				/*sky130_sram_1kbyte_1rw1r_32x256_8 sram(
 					`ifdef USE_POWER_PINS
 					.vccd1(VPWR),
 					.vssd1(VGND),
@@ -20888,7 +20902,20 @@ module eb1_lsu_dccm_mem (
 					.csb1(1'b1),
 					.addr1(8'h00),
 					.dout1()
-				);
+				);*/
+				DFFRAM dccm
+					(
+					`ifdef USE_POWER_PINS
+    					 .VPWR(VPWR),
+    					 .VGND(VGND),
+					 `endif
+    					 .CLK(clk),
+    					 .WE({4{wren_bank[i]}}),
+    					 .EN(dccm_clken[i]),
+    					 .Di(wr_data_bank[(i * pt[1360-:10]) + 31-:32]),
+    					 .Do(dccm_bank_dout[(i * pt[1360-:10]) + 31-:32]),
+    					 .A(addr_bank[((pt[1398-:9] - 1) >= (pt[1405-:7] + 2) ? pt[1405-:7] + 2 : pt[1398-:9] - 1) + (i * ((pt[1398-:9] - 1) >= (pt[1405-:7] + 2) ? ((pt[1398-:9] - 1) - (pt[1405-:7] + 2)) + 1 : ((pt[1405-:7] + 2) - (pt[1398-:9] - 1)) + 1))+:((pt[1398-:9] - 1) >= (pt[1405-:7] + 2) ? ((pt[1398-:9] - 1) - (pt[1405-:7] + 2)) + 1 : ((pt[1405-:7] + 2) - (pt[1398-:9] - 1)) + 1)])
+					);
 			end
 			else if (DCCM_INDEX_DEPTH == 128) begin : dccm
 				ram_128x39 dccm_bank(
@@ -22978,11 +23005,13 @@ module rvecc_decode_64 (
 	assign ecc_error = en & (ecc_check[6:0] != 0);
 endmodule
 module rvclkhdr (
+
 	en,
 	clk,
 	scan_mode,
 	l1clk
 );
+
 	input wire en;
 	input wire clk;
 	input wire scan_mode;
@@ -22990,6 +23019,10 @@ module rvclkhdr (
 	wire SE;
 	assign SE = 0;
 	sky130_fd_sc_hd__dlclkp_1 clkhdr(
+		`ifdef USE_POWER_PINS
+		.VPWR(1'b1),
+		.VGND(1'b0),
+		`endif
 		.CLK(clk),
 		.GCLK(l1clk),
 		.GATE(en)
@@ -23001,6 +23034,7 @@ module rvoclkhdr (
 	scan_mode,
 	l1clk
 );
+
 	input wire en;
 	input wire clk;
 	input wire scan_mode;
@@ -23008,6 +23042,10 @@ module rvoclkhdr (
 	wire SE;
 	assign SE = 0;
 	sky130_fd_sc_hd__dlclkp_1 clkhdr(
+		`ifdef USE_POWER_PINS
+		.VPWR(1'b1),
+		.VGND(1'b0),
+		`endif
 		.CLK(clk),
 		.GCLK(l1clk),
 		.GATE(en)
