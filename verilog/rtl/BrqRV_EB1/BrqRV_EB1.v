@@ -16,8 +16,8 @@
 
 module eb1_brqrv_wrapper (
 `ifdef USE_POWER_PINS
-	VPWR,
-	VGND,
+	vccd1,
+	vssd1,
 `endif	
 	clk,
 	rst_l,
@@ -225,8 +225,8 @@ module eb1_brqrv_wrapper (
 	endfunction
 	parameter [2270:0] pt = {232'h0808040001c0400000000000010102000060800080103c12160802000c, sv2v_cast_1(4'h0), 5'h01, 5'h01, 6'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 7'h02, 9'h00c, 7'h04, 10'h020, 7'h07, 5'h01, 10'h027, 8'h08, 9'h004, 8'h0f, 36'h0f0040000, 14'h0004, 6'h02, 7'h03, 5'h01, 7'h05, 9'h001, 6'h02, 8'h01, 5'h01, 5'h01, 7'h01, 7'h03, 6'h03, 8'h08, 7'h02, 8'h05, 8'h03, 5'h01, 18'h00200, 7'h04, 11'h040, 5'h01, 5'h00, 11'h047, 9'h00c, 11'h040, 8'h08, 8'h02, 8'h02, 7'h02, 5'h00, 8'h06, 13'h0010, 7'h01, 5'h01, 17'h00080, 7'h06, 9'h00d, 8'h02, 8'h02, 5'h01, 7'h02, 9'h003, 9'h004, 9'h00c, 5'h01, 5'h00, 8'h08, 9'h004, 5'h01, 8'h0a, 36'h0affff000, 14'h0004, 5'h01, 6'h02, 8'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 5'h00, 5'h00, 5'h01, 6'h02, 8'h03, 9'h004, 7'h02, 9'h00c, 8'h04, 5'h00, 5'h00, 36'h0f00c0000, 9'h00f, 8'h01, 8'h0f, 13'h0020, 12'h01f, 13'h0020, 8'h08, 5'h01, 6'h02, 8'h01, 5'h01};
 `ifdef USE_POWER_PINS
-	inout wire VPWR;
-	inout wire VGND;
+	inout wire vccd1;
+	inout wire vssd1;
 `endif
 	input wire clk;
 	input wire rst_l;
@@ -839,8 +839,8 @@ module eb1_brqrv_wrapper (
 		.iccm_wr_data((core_rst ? iccm_wr_data : {7'h00, iccm_instr_wdata, 7'h00, iccm_instr_wdata})),
 		.iccm_wr_size((core_rst ? iccm_wr_size : 3'b010)),
 		`ifdef USE_POWER_PINS
-		.VPWR(VPWR),
-		.VGND(VGND),
+		.vccd1(vccd1),
+		.vssd1(vssd1),
 		`endif
 		.dccm_clk_override(dccm_clk_override),
 		.icm_clk_override(icm_clk_override),
@@ -896,6 +896,11 @@ module eb1_brqrv_wrapper (
 		.wdata_o(iccm_instr_wdata),
 		.reset_o(core_rst)
 	);
+	
+	always @(iccm_instr_wdata) begin
+	$display("Instruction = %h", iccm_instr_wdata);
+	end
+	
 	eb1_uart_rx_prog uart_rx_m(
 		.i_Clock(clk),
 		.rst_ni(rst_l),
@@ -3079,8 +3084,8 @@ module eb1_iccm_controller (
 endmodule
 module eb1_mem (
 `ifdef USE_POWER_PINS
-	VPWR,
-	VGND,
+	vccd1,
+	vssd1,
 `endif
 	clk,
 	rst_l,
@@ -3138,8 +3143,8 @@ module eb1_mem (
 	endfunction
 	parameter [2270:0] pt = {232'h0808040001c0400000000000010102000060800080103c12160802000c, sv2v_cast_1(4'h0), 5'h01, 5'h01, 6'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 7'h02, 9'h00c, 7'h04, 10'h020, 7'h07, 5'h01, 10'h027, 8'h08, 9'h004, 8'h0f, 36'h0f0040000, 14'h0004, 6'h02, 7'h03, 5'h01, 7'h05, 9'h001, 6'h02, 8'h01, 5'h01, 5'h01, 7'h01, 7'h03, 6'h03, 8'h08, 7'h02, 8'h05, 8'h03, 5'h01, 18'h00200, 7'h04, 11'h040, 5'h01, 5'h00, 11'h047, 9'h00c, 11'h040, 8'h08, 8'h02, 8'h02, 7'h02, 5'h00, 8'h06, 13'h0010, 7'h01, 5'h01, 17'h00080, 7'h06, 9'h00d, 8'h02, 8'h02, 5'h01, 7'h02, 9'h003, 9'h004, 9'h00c, 5'h01, 5'h00, 8'h08, 9'h004, 5'h01, 8'h0a, 36'h0affff000, 14'h0004, 5'h01, 6'h02, 8'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 5'h00, 5'h00, 5'h01, 6'h02, 8'h03, 9'h004, 7'h02, 9'h00c, 8'h04, 5'h00, 5'h00, 36'h0f00c0000, 9'h00f, 8'h01, 8'h0f, 13'h0020, 12'h01f, 13'h0020, 8'h08, 5'h01, 6'h02, 8'h01, 5'h01};
 `ifdef USE_POWER_PINS
-	inout wire VPWR;
-	inout wire VGND;
+	inout wire vccd1;
+	inout wire vssd1;
 `endif
 	input wire clk;
 	input wire rst_l;
@@ -3202,8 +3207,8 @@ module eb1_mem (
 			eb1_lsu_dccm_mem #(.pt(pt)) dccm(
 				.clk_override(dccm_clk_override),
 				`ifdef USE_POWER_PINS
-				.VPWR(VPWR),
-				.VGND(VGND),
+				.vccd1(vccd1),
+				.vssd1(vssd1),
 				`endif
 				.clk(clk),
 				.active_clk(active_clk),
@@ -3245,8 +3250,8 @@ module eb1_mem (
 		if (pt[927-:5]) begin : iccm
 			eb1_ifu_iccm_mem #(.pt(pt)) iccm(
 				`ifdef USE_POWER_PINS
-				.VPWR(VPWR),
-				.VGND(VGND),
+				.vccd1(vccd1),
+				.vssd1(vssd1),
 				`endif
 				.clk(clk),
 				.active_clk(active_clk),
@@ -15182,8 +15187,8 @@ module eb1_ifu_compress_ctl (
 endmodule
 module eb1_ifu_iccm_mem (
 `ifdef USE_POWER_PINS	
-	VPWR,
-	VGND,
+	vccd1,
+	vssd1,
 `endif
 	clk,
 	active_clk,
@@ -15207,8 +15212,8 @@ module eb1_ifu_iccm_mem (
 	endfunction
 	parameter [2270:0] pt = {232'h0808040001c0400000000000010102000060800080103c12160802000c, sv2v_cast_1(4'h0), 5'h01, 5'h01, 6'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 7'h02, 9'h00c, 7'h04, 10'h020, 7'h07, 5'h01, 10'h027, 8'h08, 9'h004, 8'h0f, 36'h0f0040000, 14'h0004, 6'h02, 7'h03, 5'h01, 7'h05, 9'h001, 6'h02, 8'h01, 5'h01, 5'h01, 7'h01, 7'h03, 6'h03, 8'h08, 7'h02, 8'h05, 8'h03, 5'h01, 18'h00200, 7'h04, 11'h040, 5'h01, 5'h00, 11'h047, 9'h00c, 11'h040, 8'h08, 8'h02, 8'h02, 7'h02, 5'h00, 8'h06, 13'h0010, 7'h01, 5'h01, 17'h00080, 7'h06, 9'h00d, 8'h02, 8'h02, 5'h01, 7'h02, 9'h003, 9'h004, 9'h00c, 5'h01, 5'h00, 8'h08, 9'h004, 5'h01, 8'h0a, 36'h0affff000, 14'h0004, 5'h01, 6'h02, 8'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 5'h00, 5'h00, 5'h01, 6'h02, 8'h03, 9'h004, 7'h02, 9'h00c, 8'h04, 5'h00, 5'h00, 36'h0f00c0000, 9'h00f, 8'h01, 8'h0f, 13'h0020, 12'h01f, 13'h0020, 8'h08, 5'h01, 6'h02, 8'h01, 5'h01};
 `ifdef USE_POWER_PINS
-	inout wire VPWR;
-	inout wire VGND;
+	inout wire vccd1;
+	inout wire vssd1;
 `endif
 	input wire clk;
 	input wire active_clk;
@@ -15312,10 +15317,10 @@ module eb1_ifu_iccm_mem (
 				);
 			end
 			else if (pt[917-:8] == 8) begin : iccm
-				/*sky130_sram_1kbyte_1rw1r_32x256_8 sram(
+				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
 					`ifdef USE_POWER_PINS 
-					.vccd1(VPWR),
-					.vssd1(VGND),
+					.vccd1(vccd1),
+					.vssd1(vssd1),
 					`endif
 					.clk0(clk),
 					.csb0(~iccm_clken[i]),
@@ -15328,12 +15333,12 @@ module eb1_ifu_iccm_mem (
 					.csb1(1'b1),
 					.addr1(8'h00),
 					.dout1()
-				);*/
-				DFFRAM iccm
+				);
+				/*DFFRAM iccm
 					(
 					`ifdef USE_POWER_PINS
-    					 .VPWR(VPWR),
-    					 .VGND(VGND),
+    					 .VPWR(vccd1),
+    					 .VGND(vssd1),
 					 `endif
     					 .CLK(clk),
     					 .WE({4{wren_bank[i]}}),
@@ -15341,7 +15346,7 @@ module eb1_ifu_iccm_mem (
     					 .Di(iccm_bank_wr_data[(i * 39) + 31-:32]),
     					 .Do(iccm_bank_dout[(i * 39) + 31-:32]),
     					 .A(addr_bank[((pt[936-:9] - 1) >= pt[945-:9] ? pt[945-:9] : pt[936-:9] - 1) + (i * ((pt[936-:9] - 1) >= pt[945-:9] ? ((pt[936-:9] - 1) - pt[945-:9]) + 1 : (pt[945-:9] - (pt[936-:9] - 1)) + 1))+:((pt[936-:9] - 1) >= pt[945-:9] ? ((pt[936-:9] - 1) - pt[945-:9]) + 1 : (pt[945-:9] - (pt[936-:9] - 1)) + 1)])
-					);
+					);*/
 					
 			end
 			else if (pt[917-:8] == 9) begin : iccm
@@ -15367,8 +15372,8 @@ module eb1_ifu_iccm_mem (
 			else if (pt[917-:8] == 10) begin : iccm
 				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
 					`ifdef USE_POWER_PINS
-					.vccd1(VPWR),
-					.vssd1(VGND),
+					.vccd1(vccd1),
+					.vssd1(vssd1),
 					`endif
 					.clk0(clk),
 					.csb0(~iccm_clken[i]),
@@ -20646,8 +20651,8 @@ module eb1_lsu_dccm_ctl (
 endmodule
 module eb1_lsu_dccm_mem (
 `ifdef USE_POWER_PINS	
-	VPWR,
-	VGND,
+	vccd1,
+	vssd1,
 `endif
 	clk,
 	active_clk,
@@ -20672,8 +20677,8 @@ module eb1_lsu_dccm_mem (
 	endfunction
 	parameter [2270:0] pt = {232'h0808040001c0400000000000010102000060800080103c12160802000c, sv2v_cast_1(4'h0), 5'h01, 5'h01, 6'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 7'h02, 9'h00c, 7'h04, 10'h020, 7'h07, 5'h01, 10'h027, 8'h08, 9'h004, 8'h0f, 36'h0f0040000, 14'h0004, 6'h02, 7'h03, 5'h01, 7'h05, 9'h001, 6'h02, 8'h01, 5'h01, 5'h01, 7'h01, 7'h03, 6'h03, 8'h08, 7'h02, 8'h05, 8'h03, 5'h01, 18'h00200, 7'h04, 11'h040, 5'h01, 5'h00, 11'h047, 9'h00c, 11'h040, 8'h08, 8'h02, 8'h02, 7'h02, 5'h00, 8'h06, 13'h0010, 7'h01, 5'h01, 17'h00080, 7'h06, 9'h00d, 8'h02, 8'h02, 5'h01, 7'h02, 9'h003, 9'h004, 9'h00c, 5'h01, 5'h00, 8'h08, 9'h004, 5'h01, 8'h0a, 36'h0affff000, 14'h0004, 5'h01, 6'h02, 8'h03, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 36'h000000000, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 5'h00, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 36'h0ffffffff, 5'h00, 5'h00, 5'h01, 6'h02, 8'h03, 9'h004, 7'h02, 9'h00c, 8'h04, 5'h00, 5'h00, 36'h0f00c0000, 9'h00f, 8'h01, 8'h0f, 13'h0020, 12'h01f, 13'h0020, 8'h08, 5'h01, 6'h02, 8'h01, 5'h01};
 `ifdef USE_POWER_PINS
-	inout wire VPWR;
-	inout wire VGND;
+	inout wire vccd1;
+	inout wire vssd1;
 `endif
 	input wire clk;
 	input wire active_clk;
@@ -20848,8 +20853,8 @@ module eb1_lsu_dccm_mem (
 			else if (DCCM_INDEX_DEPTH == 1024) begin : dccm
 				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
 					`ifdef USE_POWER_PINS
-					.vccd1(VPWR),
-					.vssd1(VGND),
+					.vccd1(vccd1),
+					.vssd1(vssd1),
 					`endif
 					.clk0(clk),
 					.csb0(~dccm_clken[i]),
@@ -20886,10 +20891,10 @@ module eb1_lsu_dccm_mem (
 				);
 			end
 			else if (DCCM_INDEX_DEPTH == 256) begin : dccm
-				/*sky130_sram_1kbyte_1rw1r_32x256_8 sram(
+				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
 					`ifdef USE_POWER_PINS
-					.vccd1(VPWR),
-					.vssd1(VGND),
+					.vccd1(vccd1),
+					.vssd1(vssd1),
 					`endif
 					.clk0(clk),
 					.csb0(~dccm_clken[i]),
@@ -20902,12 +20907,12 @@ module eb1_lsu_dccm_mem (
 					.csb1(1'b1),
 					.addr1(8'h00),
 					.dout1()
-				);*/
-				DFFRAM dccm
+				);
+				/*DFFRAM dccm
 					(
 					`ifdef USE_POWER_PINS
-    					 .VPWR(VPWR),
-    					 .VGND(VGND),
+    					 .VPWR(vccd1),
+    					 .VGND(vssd1),
 					 `endif
     					 .CLK(clk),
     					 .WE({4{wren_bank[i]}}),
@@ -20915,7 +20920,7 @@ module eb1_lsu_dccm_mem (
     					 .Di(wr_data_bank[(i * pt[1360-:10]) + 31-:32]),
     					 .Do(dccm_bank_dout[(i * pt[1360-:10]) + 31-:32]),
     					 .A(addr_bank[((pt[1398-:9] - 1) >= (pt[1405-:7] + 2) ? pt[1405-:7] + 2 : pt[1398-:9] - 1) + (i * ((pt[1398-:9] - 1) >= (pt[1405-:7] + 2) ? ((pt[1398-:9] - 1) - (pt[1405-:7] + 2)) + 1 : ((pt[1405-:7] + 2) - (pt[1398-:9] - 1)) + 1))+:((pt[1398-:9] - 1) >= (pt[1405-:7] + 2) ? ((pt[1398-:9] - 1) - (pt[1405-:7] + 2)) + 1 : ((pt[1405-:7] + 2) - (pt[1398-:9] - 1)) + 1)])
-					);
+					);*/
 			end
 			else if (DCCM_INDEX_DEPTH == 128) begin : dccm
 				ram_128x39 dccm_bank(
