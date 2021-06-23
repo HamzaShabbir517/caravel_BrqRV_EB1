@@ -144,8 +144,8 @@ module user_proj_example #(
    //=========================================================================-
 eb1_brqrv_wrapper brqrv_top (
 `ifdef USE_POWER_PINS
-    .VPWR		     ( vccd1	      ),
-    .VGND                   ( vssd1         ),
+    .vccd1		     ( vccd1	      ),
+    .vssd1                   ( vssd1         ),
 `endif
     .rst_l                  ( rst           ),
     .dbg_rst_l              ( ~wb_rst_i     ),
