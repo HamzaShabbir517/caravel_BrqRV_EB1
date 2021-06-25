@@ -897,9 +897,9 @@ module eb1_brqrv_wrapper (
 		.reset_o(core_rst)
 	);
 	
-	always @(iccm_instr_wdata) begin
-	$display("Instruction = %h", iccm_instr_wdata);
-	end
+	//always @(iccm_instr_wdata) begin
+	//$display("Instruction = %h", iccm_instr_wdata);
+	//end
 	
 	eb1_uart_rx_prog uart_rx_m(
 		.i_Clock(clk),
@@ -15317,7 +15317,7 @@ module eb1_ifu_iccm_mem (
 				);
 			end
 			else if (pt[917-:8] == 8) begin : iccm
-				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
+				/*sky130_sram_1kbyte_1rw1r_32x256_8 sram(
 					`ifdef USE_POWER_PINS 
 					.vccd1(vccd1),
 					.vssd1(vssd1),
@@ -15333,7 +15333,7 @@ module eb1_ifu_iccm_mem (
 					.csb1(1'b1),
 					.addr1(8'h00),
 					.dout1()
-				);
+				);*/
 				/*DFFRAM iccm
 					(
 					`ifdef USE_POWER_PINS
@@ -15347,6 +15347,18 @@ module eb1_ifu_iccm_mem (
     					 .Do(iccm_bank_dout[(i * 39) + 31-:32]),
     					 .A(addr_bank[((pt[936-:9] - 1) >= pt[945-:9] ? pt[945-:9] : pt[936-:9] - 1) + (i * ((pt[936-:9] - 1) >= pt[945-:9] ? ((pt[936-:9] - 1) - pt[945-:9]) + 1 : (pt[945-:9] - (pt[936-:9] - 1)) + 1))+:((pt[936-:9] - 1) >= pt[945-:9] ? ((pt[936-:9] - 1) - pt[945-:9]) + 1 : (pt[945-:9] - (pt[936-:9] - 1)) + 1)])
 					);*/
+					SRAM64x32 iccm(
+						`ifdef USE_POWER_PINS
+    						.VPWR(vccd1),
+    						.VGND(vssd1),
+						`endif
+    						.CLK(clk),
+    						.WE({4{wren_bank[i]}}),
+    						.EN(iccm_clken[i]),
+    						.Di(iccm_bank_wr_data[(i * 39) + 31-:32]),
+    						.Do(iccm_bank_dout[(i * 39) + 31-:32]),
+    						.A(addr_bank[((pt[936-:9] - 1) >= pt[945-:9] ? pt[945-:9] : pt[936-:9] - 1) + (i * ((pt[936-:9] - 1) >= pt[945-:9] ? ((pt[936-:9] - 1) - pt[945-:9]) + 1 : (pt[945-:9] - (pt[936-:9] - 1)) + 1))+:((pt[936-:9] - 1) >= pt[945-:9] ? ((pt[936-:9] - 1) - pt[945-:9]) + 1 : (pt[945-:9] - (pt[936-:9] - 1)) + 1)])
+);
 					
 			end
 			else if (pt[917-:8] == 9) begin : iccm
@@ -20891,7 +20903,7 @@ module eb1_lsu_dccm_mem (
 				);
 			end
 			else if (DCCM_INDEX_DEPTH == 256) begin : dccm
-				sky130_sram_1kbyte_1rw1r_32x256_8 sram(
+				/*sky130_sram_1kbyte_1rw1r_32x256_8 sram(
 					`ifdef USE_POWER_PINS
 					.vccd1(vccd1),
 					.vssd1(vssd1),
@@ -20907,7 +20919,20 @@ module eb1_lsu_dccm_mem (
 					.csb1(1'b1),
 					.addr1(8'h00),
 					.dout1()
-				);
+				);*/
+				SRAM64x32 dccm(
+						`ifdef USE_POWER_PINS
+    						.VPWR(vccd1),
+    						.VGND(vssd1),
+						`endif
+    						.CLK(clk),
+    						.WE({4{wren_bank[i]}}),
+    						.EN(dccm_clken[i]),
+    						.Di(wr_data_bank[(i * pt[1360-:10]) + 31-:32]),
+    						.Do(dccm_bank_dout[(i * pt[1360-:10]) + 31-:32]),
+    						.A(addr_bank[((pt[1398-:9] - 1) >= (pt[1405-:7] + 2) ? pt[1405-:7] + 2 : pt[1398-:9] - 1) + (i * ((pt[1398-:9] - 1) >= (pt[1405-:7] + 2) ? ((pt[1398-:9] - 1) - (pt[1405-:7] + 2)) + 1 : ((pt[1405-:7] + 2) - (pt[1398-:9] - 1)) + 1))+:((pt[1398-:9] - 1) >= (pt[1405-:7] + 2) ? ((pt[1398-:9] - 1) - (pt[1405-:7] + 2)) + 1 : ((pt[1405-:7] + 2) - (pt[1398-:9] - 1)) + 1)])
+);
+					
 				/*DFFRAM dccm
 					(
 					`ifdef USE_POWER_PINS
