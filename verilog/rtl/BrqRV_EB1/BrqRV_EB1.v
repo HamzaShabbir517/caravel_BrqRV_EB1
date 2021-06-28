@@ -897,9 +897,9 @@ module eb1_brqrv_wrapper (
 		.reset_o(core_rst)
 	);
 	
-	//always @(iccm_instr_wdata) begin
-	//$display("Instruction = %h", iccm_instr_wdata);
-	//end
+	always @(iccm_instr_we) begin
+	$display("Instruction = %h", iccm_instr_wdata);
+	end
 	
 	eb1_uart_rx_prog uart_rx_m(
 		.i_Clock(clk),
@@ -15334,7 +15334,7 @@ module eb1_ifu_iccm_mem (
 					.addr1(8'h00),
 					.dout1()
 				);*/
-				/*DFFRAM iccm
+				DFFRAM iccm
 					(
 					`ifdef USE_POWER_PINS
     					 .VPWR(vccd1),
@@ -15346,8 +15346,8 @@ module eb1_ifu_iccm_mem (
     					 .Di(iccm_bank_wr_data[(i * 39) + 31-:32]),
     					 .Do(iccm_bank_dout[(i * 39) + 31-:32]),
     					 .A(addr_bank[((pt[936-:9] - 1) >= pt[945-:9] ? pt[945-:9] : pt[936-:9] - 1) + (i * ((pt[936-:9] - 1) >= pt[945-:9] ? ((pt[936-:9] - 1) - pt[945-:9]) + 1 : (pt[945-:9] - (pt[936-:9] - 1)) + 1))+:((pt[936-:9] - 1) >= pt[945-:9] ? ((pt[936-:9] - 1) - pt[945-:9]) + 1 : (pt[945-:9] - (pt[936-:9] - 1)) + 1)])
-					);*/
-					SRAM64x32 iccm(
+					);
+					/*SRAM64x32 iccm(
 						`ifdef USE_POWER_PINS
     						.VPWR(vccd1),
     						.VGND(vssd1),
@@ -15359,7 +15359,7 @@ module eb1_ifu_iccm_mem (
     						.Do(iccm_bank_dout[(i * 39) + 31-:32]),
     						.A(addr_bank[((pt[936-:9] - 1) >= pt[945-:9] ? pt[945-:9] : pt[936-:9] - 1) + (i * ((pt[936-:9] - 1) >= pt[945-:9] ? ((pt[936-:9] - 1) - pt[945-:9]) + 1 : (pt[945-:9] - (pt[936-:9] - 1)) + 1))+:((pt[936-:9] - 1) >= pt[945-:9] ? ((pt[936-:9] - 1) - pt[945-:9]) + 1 : (pt[945-:9] - (pt[936-:9] - 1)) + 1)])
 );
-					
+			*/		
 			end
 			else if (pt[917-:8] == 9) begin : iccm
 				ram_512x39 iccm_bank(
@@ -20920,7 +20920,7 @@ module eb1_lsu_dccm_mem (
 					.addr1(8'h00),
 					.dout1()
 				);*/
-				SRAM64x32 dccm(
+				/*SRAM64x32 dccm(
 						`ifdef USE_POWER_PINS
     						.VPWR(vccd1),
     						.VGND(vssd1),
@@ -20931,9 +20931,9 @@ module eb1_lsu_dccm_mem (
     						.Di(wr_data_bank[(i * pt[1360-:10]) + 31-:32]),
     						.Do(dccm_bank_dout[(i * pt[1360-:10]) + 31-:32]),
     						.A(addr_bank[((pt[1398-:9] - 1) >= (pt[1405-:7] + 2) ? pt[1405-:7] + 2 : pt[1398-:9] - 1) + (i * ((pt[1398-:9] - 1) >= (pt[1405-:7] + 2) ? ((pt[1398-:9] - 1) - (pt[1405-:7] + 2)) + 1 : ((pt[1405-:7] + 2) - (pt[1398-:9] - 1)) + 1))+:((pt[1398-:9] - 1) >= (pt[1405-:7] + 2) ? ((pt[1398-:9] - 1) - (pt[1405-:7] + 2)) + 1 : ((pt[1405-:7] + 2) - (pt[1398-:9] - 1)) + 1)])
-);
+);*/
 					
-				/*DFFRAM dccm
+				DFFRAM dccm
 					(
 					`ifdef USE_POWER_PINS
     					 .VPWR(vccd1),
@@ -20945,7 +20945,7 @@ module eb1_lsu_dccm_mem (
     					 .Di(wr_data_bank[(i * pt[1360-:10]) + 31-:32]),
     					 .Do(dccm_bank_dout[(i * pt[1360-:10]) + 31-:32]),
     					 .A(addr_bank[((pt[1398-:9] - 1) >= (pt[1405-:7] + 2) ? pt[1405-:7] + 2 : pt[1398-:9] - 1) + (i * ((pt[1398-:9] - 1) >= (pt[1405-:7] + 2) ? ((pt[1398-:9] - 1) - (pt[1405-:7] + 2)) + 1 : ((pt[1405-:7] + 2) - (pt[1398-:9] - 1)) + 1))+:((pt[1398-:9] - 1) >= (pt[1405-:7] + 2) ? ((pt[1398-:9] - 1) - (pt[1405-:7] + 2)) + 1 : ((pt[1405-:7] + 2) - (pt[1398-:9] - 1)) + 1)])
-					);*/
+					);
 			end
 			else if (DCCM_INDEX_DEPTH == 128) begin : dccm
 				ram_128x39 dccm_bank(

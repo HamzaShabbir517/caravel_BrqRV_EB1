@@ -83,15 +83,15 @@ module BrqRV_EB1_tb();
             wait(mprj_io_0 == 28'd13);
             */
             // Observe Output pins [35:8] for multliplication_table
-            /*wait(mprj_io_0 == 28'd5);
+            wait(mprj_io_0 == 28'd5);
             wait(mprj_io_0 == 28'd10);
             wait(mprj_io_0 == 28'd15);
             wait(mprj_io_0 == 28'd20);
             wait(mprj_io_0 == 28'd25);
             wait(mprj_io_0 == 28'd30);
-            */
+            
             // Observe Output pins [35:8] for mean & Determinant
-            wait(mprj_io_0 == 28'd5);
+           // wait(mprj_io_0 == 28'd5);
             
             // Observe Output pins [35:8] for power
             //wait(mprj_io_0 == 28'd64);
