@@ -443,8 +443,8 @@ eb1_brqrv_wrapper brqrv_top (
     .dec_tlu_perfcnt3       (),
 
 // remove mems DFT pins for opensource
-    .dccm_ext_in_pkt        ( 24'b0),
-    .iccm_ext_in_pkt        ( 24'b0),
+    .dccm_ext_in_pkt        ( 48'b0),
+    .iccm_ext_in_pkt        ( 48'b0),
     .ic_data_ext_in_pkt     ( 48'b0),
     .ic_tag_ext_in_pkt      ( 24'b0),
 
