@@ -25,9 +25,7 @@
     `include "gl/user_proj_example.v"
 `else
     `include "BrqRV_EB1/sky130_sram_1kbyte_1rw1r_32x256_8.v"
-    //`include "BrqRV_EB1/DFFRAM.v"
-    //`include "BrqRV_EB1/DFFRAMBB.v"
-   
+    
    // for netlist verification
     //`include "../gl/user_project_wrapper.v"
     //`include "../gl/user_proj_example.v"
@@ -35,6 +33,6 @@
   // for rtl verification
     `include "user_project_wrapper.v"
     `include "user_proj_example.v"
-    `include "BrqRV_EB1/BrqRV_EB1_new.v"
+    `include "BrqRV_EB1/BrqRV_EB1.v"
     
 `endif
