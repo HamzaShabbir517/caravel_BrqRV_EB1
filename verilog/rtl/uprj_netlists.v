@@ -26,8 +26,8 @@
 `else
     
    // for netlist verification
-    //`include "../gl/user_project_wrapper.v"
-    //`include "../gl/user_proj_example.v"
+   // `include "../gl/user_project_wrapper.v"
+   // `include "../gl/user_proj_example.v"
    
   // for rtl verification
     `include "user_project_wrapper.v"
