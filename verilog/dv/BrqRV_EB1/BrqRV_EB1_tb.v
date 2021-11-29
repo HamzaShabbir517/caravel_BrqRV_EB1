@@ -20,7 +20,7 @@
 `include "uprj_netlists.v"
 `include "caravel_netlists.v"
 `include "spiflash.v"
-`include "tb_prog.v"
+//`include "tb_prog.v"
 
 module BrqRV_EB1_tb();
     reg clock;
@@ -32,20 +32,33 @@ module BrqRV_EB1_tb();
     wire gpio;
     wire [37:0] mprj_io;
 
-    wire [27:0] mprj_io_0;
+    wire [7:0] mprj_io_0;
     wire mprj_ready;
+    reg [31:0] count;
     
-    assign mprj_io_0 = mprj_io[35:8];
+    assign mprj_io_0 = mprj_io[34:27];
     assign mprj_ready = mprj_io[37];
     
     assign mprj_io[3] = (CSB == 1'b1) ? 1'b1 : 1'bz;
+    assign mprj_io[8] = (mprj_ready) ? 1'b0 : 1'b1;
+    assign mprj_io[9] = (mprj_ready) ? 1'b1 : 1'b1;
+    assign mprj_io[10] = (mprj_ready) ? 1'b1 : 1'b1;
+    assign mprj_io[35] = 1'b1;
+    assign mprj_io[26:11] = (mprj_ready) ? count : 16'h0000;
     
     always #12.5 clock <= (clock === 1'b0);
     
     initial begin
         clock = 0;
+        count = 0;
     end
  
+    always @(posedge clock) begin
+    	if(mprj_ready) begin
+    		count = count + 32'd1;
+    	end
+    end
+    		
     initial begin
         $dumpfile("BrqRV_EB1.vcd");
         $dumpvars(0, BrqRV_EB1_tb);
@@ -61,7 +74,20 @@ module BrqRV_EB1_tb();
     end
 
 	initial begin
+	    $display("I am not ready");
 	    wait(mprj_ready == 1'b1)
+	    $display("I am ready");
+	    // Memory output
+	    //wait(mprj_io_0 == 8'h00);
+	    //wait(mprj_io_0 == 8'h01);
+	    //wait(mprj_io_0 == 8'h02);
+	    //wait(mprj_io_0 == 8'h03);
+	    //wait(mprj_io_0 == 8'h04);
+	    //wait(mprj_io_0 == 8'h05);
+	    //wait(mprj_io_0 == 8'h06);
+	    //wait(mprj_io_0 == 8'h07);
+	    //wait(mprj_io_0 == 8'h08);
+	    wait(mprj_io_0 == 8'h99);
 	    // Observe Output pins [35:8] for factorial
 	    /*wait(mprj_io_0 == 28'h0000001);
 	    wait(mprj_io_0 == 28'h0000002);
@@ -83,13 +109,13 @@ module BrqRV_EB1_tb();
             wait(mprj_io_0 == 28'd13);
             */
             // Observe Output pins [35:8] for multliplication_table
-            wait(mprj_io_0 == 28'd5);
+            /*wait(mprj_io_0 == 28'd5);
             wait(mprj_io_0 == 28'd10);
             wait(mprj_io_0 == 28'd15);
             wait(mprj_io_0 == 28'd20);
             wait(mprj_io_0 == 28'd25);
             wait(mprj_io_0 == 28'd30);
-            
+            */
             // Observe Output pins [35:8] for mean & Determinant
            // wait(mprj_io_0 == 28'd5);
             
@@ -100,14 +126,14 @@ module BrqRV_EB1_tb();
             //wait(mprj_io_0 == 28'd4889874);
             
             // Observe Output pins [35:8] for Queue 
-            //wait(mprj_io_0 == 28'd5);
-            //wait(mprj_io_0 == 28'd6);
-            //wait(mprj_io_0 == 28'd7);
-            
+            /*wait(mprj_io_0 == 28'd5);
+            wait(mprj_io_0 == 28'd6);
+            wait(mprj_io_0 == 28'd7);
+            */
             // Observe Output pins [35:8] for perfect square
             //wait(mprj_io_0 == 28'd5);
             
-            // Observe Output pins [35:8] for counter / ascending / reverse
+            // Observe Output pins [35:8] for counter / ascending
             /*wait(mprj_io_0 == 28'd0);
             wait(mprj_io_0 == 28'd1);
             wait(mprj_io_0 == 28'd2);
@@ -121,11 +147,25 @@ module BrqRV_EB1_tb();
             wait(mprj_io_0 == 28'd10);
             wait(mprj_io_0 == 28'd11);
             */
-            //wait(mprj_io_0 == 28'd3);
-            //wait(mprj_io_0 == 28'd2);
-            //wait(mprj_io_0 == 28'd1);
-            //wait(mprj_io_0 == 28'd0);
-            $display("MPRJ-IO state = %d", mprj_io[35:8]);  
+            // Observe Output pin [35:8] for reverse
+            /*wait(mprj_io_0 == 28'd15);
+            wait(mprj_io_0 == 28'd14);
+            wait(mprj_io_0 == 28'd13);
+            wait(mprj_io_0 == 28'd12);
+            wait(mprj_io_0 == 28'd11);
+            wait(mprj_io_0 == 28'd10);
+            wait(mprj_io_0 == 28'd9);
+            wait(mprj_io_0 == 28'd8);
+            wait(mprj_io_0 == 28'd7);
+            wait(mprj_io_0 == 28'd6);
+            wait(mprj_io_0 == 28'd5);
+            wait(mprj_io_0 == 28'd4); 
+            wait(mprj_io_0 == 28'd3);
+            wait(mprj_io_0 == 28'd2);
+            wait(mprj_io_0 == 28'd1);
+            wait(mprj_io_0 == 28'd0);
+            */
+            //$display("MPRJ-IO state = %d", mprj_io[35:8]);  
 		
 		`ifdef GL
 	    	$display("Monitor: Test 1 Mega-Project IO (GL) Passed");
@@ -161,16 +201,14 @@ module BrqRV_EB1_tb();
 	end
 	
 	always @(mprj_io) begin
-		#1 $display("MPRJ-IO state = %d, at time = %0t  ", mprj_io[35:8], $time);
+		$display("MPRJ-IO state = %h, at time = %0t  ", mprj_io[34:27], $time);
 	end
 	
 	wire flash_csb;
 	wire flash_clk;
 	wire flash_io0;
 	wire flash_io1;
-	wire r_Rx_Serial;
-	assign mprj_io[5] = r_Rx_Serial;
-	assign mprj_io[3:0] = 4'h0;
+	//assign mprj_io[3:0] = 4'h0;
 
 	wire VDD3V3 = power1;
 	wire VDD1V8 = power2;
@@ -185,12 +223,12 @@ module BrqRV_EB1_tb();
 		.vssa	  (VSS),
 		.vccd	  (VDD1V8),
 		.vssd	  (VSS),
-		.vdda1    (USER_VDD3V3),
-		.vdda2    (USER_VDD3V3),
+		.vdda1    (VDD3V3),
+		.vdda2    (VDD3V3),
 		.vssa1	  (VSS),
 		.vssa2	  (VSS),
-		.vccd1	  (USER_VDD1V8),
-		.vccd2	  (USER_VDD1V8),
+		.vccd1	  (VDD1V8),
+		.vccd2	  (VDD1V8),
 		.vssd1	  (VSS),
 		.vssd2	  (VSS),
 		.clock	  (clock),
@@ -215,13 +253,14 @@ module BrqRV_EB1_tb();
 	);
 	
 	
-	uartprog #(
+	/*uartprog #(
 		.FILENAME("../hex/uart.hex")
 	) prog_uut (
 		//.clk(clock),
 		.mprj_ready (mprj_ready),
 		.r_Rx_Serial (r_Rx_Serial)
-	);
+	);*/
 
 endmodule
 `default_nettype wire
+    

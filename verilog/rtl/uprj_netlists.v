@@ -32,6 +32,10 @@
   // for rtl verification
     `include "user_project_wrapper.v"
     `include "user_proj_example.v"
-    `include "BrqRV_EB1/BrqRV_EB1.v"
+    `include "rams/ram_256x32_2r1w/utils.vh"
+    `include "rams/ram_256x32_2r1w/ram_generated_256x32_2r1w.v"
+    `include "rams/ram_256x32_2r1w/ram_generated_256x32_1rw.v"
+    `include "sky130_sram_1kbyte_1rw1r_32x256_8.v"
+    
     
 `endif
