@@ -83,6 +83,7 @@ module user_project_wrapper #(
 /*--------------------------------------*/
 
 user_proj_example mprj (
+<<<<<<< HEAD
     `ifdef USE_POWER_PINS
 	//.vdda1(vdda1),	// User area 1 3.3V power
 	//.vdda2(vdda2),	// User area 2 3.3V power
@@ -93,6 +94,12 @@ user_proj_example mprj (
 	.vssd1(vssd1),	// User area 1 digital ground
 	//.vssd2(vssd2),	// User area 2 digital ground
     `endif
+=======
+`ifdef USE_POWER_PINS
+	.vccd1(vccd1),	// User area 1 1.8V power
+	.vssd1(vssd1),	// User area 1 digital ground
+`endif
+>>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
 
     .wb_clk_i(wb_clk_i),
     .wb_rst_i(wb_rst_i),
