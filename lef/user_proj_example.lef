@@ -931,11 +931,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 1021.820000 0.000000 1021.960000 0.490000 ;
-=======
         RECT 895.250 0.000 895.530 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[119]
   PIN la_data_in[118]
@@ -943,9 +939,6 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 1017.220000 0.000000 1017.360000 0.490000 ;
-=======
         RECT 897.090 0.000 897.370 4.000 ;
     END
   END irq[1]
@@ -955,7 +948,6 @@ MACRO user_proj_example
     PORT
       LAYER met2 ;
         RECT 898.930 0.000 899.210 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[118]
   PIN la_data_in[117]
@@ -963,11 +955,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 1012.620000 0.000000 1012.760000 0.490000 ;
-=======
         RECT 193.750 0.000 194.030 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[117]
   PIN la_data_in[116]
@@ -975,11 +963,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 1008.020000 0.000000 1008.160000 0.490000 ;
-=======
         RECT 741.610 0.000 741.890 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[116]
   PIN la_data_in[115]
@@ -987,11 +971,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 1003.880000 0.000000 1004.020000 0.490000 ;
-=======
         RECT 747.130 0.000 747.410 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[115]
   PIN la_data_in[114]
@@ -999,11 +979,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 999.280000 0.000000 999.420000 0.490000 ;
-=======
         RECT 752.650 0.000 752.930 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[114]
   PIN la_data_in[113]
@@ -1011,11 +987,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 994.680000 0.000000 994.820000 0.490000 ;
-=======
         RECT 758.170 0.000 758.450 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[113]
   PIN la_data_in[112]
@@ -1023,11 +995,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 990.080000 0.000000 990.220000 0.490000 ;
-=======
         RECT 763.690 0.000 763.970 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[112]
   PIN la_data_in[111]
@@ -1035,11 +1003,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 985.480000 0.000000 985.620000 0.490000 ;
-=======
         RECT 769.210 0.000 769.490 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[111]
   PIN la_data_in[110]
@@ -1047,11 +1011,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 980.880000 0.000000 981.020000 0.490000 ;
-=======
         RECT 774.730 0.000 775.010 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[110]
   PIN la_data_in[109]
@@ -1059,11 +1019,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 976.280000 0.000000 976.420000 0.490000 ;
-=======
         RECT 780.250 0.000 780.530 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[109]
   PIN la_data_in[108]
@@ -1071,11 +1027,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 971.680000 0.000000 971.820000 0.490000 ;
-=======
         RECT 785.310 0.000 785.590 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[108]
   PIN la_data_in[107]
@@ -1083,11 +1035,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 967.540000 0.000000 967.680000 0.490000 ;
-=======
         RECT 790.830 0.000 791.110 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[107]
   PIN la_data_in[106]
@@ -1095,11 +1043,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 962.940000 0.000000 963.080000 0.490000 ;
-=======
         RECT 248.490 0.000 248.770 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[106]
   PIN la_data_in[105]
@@ -1107,11 +1051,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 958.340000 0.000000 958.480000 0.490000 ;
-=======
         RECT 796.350 0.000 796.630 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[105]
   PIN la_data_in[104]
@@ -1119,11 +1059,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 953.740000 0.000000 953.880000 0.490000 ;
-=======
         RECT 801.870 0.000 802.150 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[104]
   PIN la_data_in[103]
@@ -1131,11 +1067,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 949.140000 0.000000 949.280000 0.490000 ;
-=======
         RECT 807.390 0.000 807.670 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[103]
   PIN la_data_in[102]
@@ -1143,11 +1075,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 944.540000 0.000000 944.680000 0.490000 ;
-=======
         RECT 812.910 0.000 813.190 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[102]
   PIN la_data_in[101]
@@ -1155,11 +1083,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 939.940000 0.000000 940.080000 0.490000 ;
-=======
         RECT 818.430 0.000 818.710 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[101]
   PIN la_data_in[100]
@@ -1167,11 +1091,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 935.340000 0.000000 935.480000 0.490000 ;
-=======
         RECT 823.950 0.000 824.230 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[100]
   PIN la_data_in[99]
@@ -1179,11 +1099,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 931.200000 0.000000 931.340000 0.490000 ;
-=======
         RECT 829.470 0.000 829.750 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[99]
   PIN la_data_in[98]
@@ -1191,11 +1107,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 926.600000 0.000000 926.740000 0.490000 ;
-=======
         RECT 834.990 0.000 835.270 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[98]
   PIN la_data_in[97]
@@ -1203,11 +1115,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 922.000000 0.000000 922.140000 0.490000 ;
-=======
         RECT 840.510 0.000 840.790 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[97]
   PIN la_data_in[96]
@@ -1215,11 +1123,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 917.400000 0.000000 917.540000 0.490000 ;
-=======
         RECT 845.570 0.000 845.850 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[96]
   PIN la_data_in[95]
@@ -1227,11 +1131,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 912.800000 0.000000 912.940000 0.490000 ;
-=======
         RECT 254.010 0.000 254.290 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[95]
   PIN la_data_in[94]
@@ -1239,11 +1139,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 908.200000 0.000000 908.340000 0.490000 ;
-=======
         RECT 851.090 0.000 851.370 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[94]
   PIN la_data_in[93]
@@ -1251,11 +1147,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 903.600000 0.000000 903.740000 0.490000 ;
-=======
         RECT 856.610 0.000 856.890 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[93]
   PIN la_data_in[92]
@@ -1263,11 +1155,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 899.000000 0.000000 899.140000 0.490000 ;
-=======
         RECT 862.130 0.000 862.410 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[92]
   PIN la_data_in[91]
@@ -1275,11 +1163,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 894.860000 0.000000 895.000000 0.490000 ;
-=======
         RECT 867.650 0.000 867.930 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[91]
   PIN la_data_in[90]
@@ -1287,11 +1171,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 890.260000 0.000000 890.400000 0.490000 ;
-=======
         RECT 873.170 0.000 873.450 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[90]
   PIN la_data_in[89]
@@ -1299,11 +1179,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 885.660000 0.000000 885.800000 0.490000 ;
-=======
         RECT 878.690 0.000 878.970 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[89]
   PIN la_data_in[88]
@@ -1311,11 +1187,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 881.060000 0.000000 881.200000 0.490000 ;
-=======
         RECT 884.210 0.000 884.490 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[88]
   PIN la_data_in[87]
@@ -1323,11 +1195,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 876.460000 0.000000 876.600000 0.490000 ;
-=======
         RECT 889.730 0.000 890.010 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[87]
   PIN la_data_in[86]
@@ -1335,11 +1203,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 871.860000 0.000000 872.000000 0.490000 ;
-=======
         RECT 259.530 0.000 259.810 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[86]
   PIN la_data_in[85]
@@ -1347,11 +1211,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 867.260000 0.000000 867.400000 0.490000 ;
-=======
         RECT 265.050 0.000 265.330 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[85]
   PIN la_data_in[84]
@@ -1359,11 +1219,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 862.660000 0.000000 862.800000 0.490000 ;
-=======
         RECT 270.570 0.000 270.850 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[84]
   PIN la_data_in[83]
@@ -1371,11 +1227,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 858.520000 0.000000 858.660000 0.490000 ;
-=======
         RECT 276.090 0.000 276.370 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[83]
   PIN la_data_in[82]
@@ -1383,11 +1235,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 853.920000 0.000000 854.060000 0.490000 ;
-=======
         RECT 281.610 0.000 281.890 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[82]
   PIN la_data_in[81]
@@ -1395,11 +1243,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 849.320000 0.000000 849.460000 0.490000 ;
-=======
         RECT 287.130 0.000 287.410 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[81]
   PIN la_data_in[80]
@@ -1407,11 +1251,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 844.720000 0.000000 844.860000 0.490000 ;
-=======
         RECT 292.650 0.000 292.930 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[80]
   PIN la_data_in[79]
@@ -1419,11 +1259,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 840.120000 0.000000 840.260000 0.490000 ;
-=======
         RECT 298.170 0.000 298.450 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[79]
   PIN la_data_in[78]
@@ -1431,11 +1267,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 835.520000 0.000000 835.660000 0.490000 ;
-=======
         RECT 199.270 0.000 199.550 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[78]
   PIN la_data_in[77]
@@ -1443,11 +1275,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 830.920000 0.000000 831.060000 0.490000 ;
-=======
         RECT 303.230 0.000 303.510 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[77]
   PIN la_data_in[76]
@@ -1455,11 +1283,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 826.320000 0.000000 826.460000 0.490000 ;
-=======
         RECT 308.750 0.000 309.030 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[76]
   PIN la_data_in[75]
@@ -1467,11 +1291,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 822.180000 0.000000 822.320000 0.490000 ;
-=======
         RECT 314.270 0.000 314.550 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[75]
   PIN la_data_in[74]
@@ -1479,11 +1299,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 817.580000 0.000000 817.720000 0.490000 ;
-=======
         RECT 319.790 0.000 320.070 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[74]
   PIN la_data_in[73]
@@ -1491,11 +1307,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 812.980000 0.000000 813.120000 0.490000 ;
-=======
         RECT 325.310 0.000 325.590 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[73]
   PIN la_data_in[72]
@@ -1503,11 +1315,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 808.380000 0.000000 808.520000 0.490000 ;
-=======
         RECT 330.830 0.000 331.110 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[72]
   PIN la_data_in[71]
@@ -1515,11 +1323,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 803.780000 0.000000 803.920000 0.490000 ;
-=======
         RECT 336.350 0.000 336.630 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[71]
   PIN la_data_in[70]
@@ -1527,11 +1331,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 799.180000 0.000000 799.320000 0.490000 ;
-=======
         RECT 341.870 0.000 342.150 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[70]
   PIN la_data_in[69]
@@ -1539,11 +1339,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 794.580000 0.000000 794.720000 0.490000 ;
-=======
         RECT 347.390 0.000 347.670 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[69]
   PIN la_data_in[68]
@@ -1551,11 +1347,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 789.980000 0.000000 790.120000 0.490000 ;
-=======
         RECT 352.910 0.000 353.190 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[68]
   PIN la_data_in[67]
@@ -1563,11 +1355,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 785.840000 0.000000 785.980000 0.490000 ;
-=======
         RECT 204.790 0.000 205.070 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[67]
   PIN la_data_in[66]
@@ -1575,11 +1363,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 781.240000 0.000000 781.380000 0.490000 ;
-=======
         RECT 358.430 0.000 358.710 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[66]
   PIN la_data_in[65]
@@ -1587,11 +1371,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 776.640000 0.000000 776.780000 0.490000 ;
-=======
         RECT 363.490 0.000 363.770 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[65]
   PIN la_data_in[64]
@@ -1599,11 +1379,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 772.040000 0.000000 772.180000 0.490000 ;
-=======
         RECT 369.010 0.000 369.290 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[64]
   PIN la_data_in[63]
@@ -1611,11 +1387,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 767.440000 0.000000 767.580000 0.490000 ;
-=======
         RECT 374.530 0.000 374.810 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[63]
   PIN la_data_in[62]
@@ -1623,11 +1395,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 762.840000 0.000000 762.980000 0.490000 ;
-=======
         RECT 380.050 0.000 380.330 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[62]
   PIN la_data_in[61]
@@ -1635,11 +1403,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 758.240000 0.000000 758.380000 0.490000 ;
-=======
         RECT 385.570 0.000 385.850 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[61]
   PIN la_data_in[60]
@@ -1647,11 +1411,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 753.640000 0.000000 753.780000 0.490000 ;
-=======
         RECT 391.090 0.000 391.370 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[60]
   PIN la_data_in[59]
@@ -1659,11 +1419,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 749.500000 0.000000 749.640000 0.490000 ;
-=======
         RECT 396.610 0.000 396.890 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[59]
   PIN la_data_in[58]
@@ -1671,11 +1427,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 744.900000 0.000000 745.040000 0.490000 ;
-=======
         RECT 402.130 0.000 402.410 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[58]
   PIN la_data_in[57]
@@ -1683,11 +1435,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 740.300000 0.000000 740.440000 0.490000 ;
-=======
         RECT 407.650 0.000 407.930 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[57]
   PIN la_data_in[56]
@@ -1695,11 +1443,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 735.700000 0.000000 735.840000 0.490000 ;
-=======
         RECT 210.310 0.000 210.590 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[56]
   PIN la_data_in[55]
@@ -1707,11 +1451,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 731.100000 0.000000 731.240000 0.490000 ;
-=======
         RECT 413.170 0.000 413.450 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[55]
   PIN la_data_in[54]
@@ -1719,11 +1459,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 726.500000 0.000000 726.640000 0.490000 ;
-=======
         RECT 418.690 0.000 418.970 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[54]
   PIN la_data_in[53]
@@ -1731,11 +1467,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 721.900000 0.000000 722.040000 0.490000 ;
-=======
         RECT 423.750 0.000 424.030 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[53]
   PIN la_data_in[52]
@@ -1743,11 +1475,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 717.300000 0.000000 717.440000 0.490000 ;
-=======
         RECT 429.270 0.000 429.550 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[52]
   PIN la_data_in[51]
@@ -1755,11 +1483,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 713.160000 0.000000 713.300000 0.490000 ;
-=======
         RECT 434.790 0.000 435.070 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[51]
   PIN la_data_in[50]
@@ -1767,11 +1491,7 @@ MACRO user_proj_example
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-<<<<<<< HEAD
-        RECT 708.560000 0.000000 708.700000 0.490000 ;
-=======
         RECT 440.310 0.000 440.590 4.000 ;
->>>>>>> c5da9e9885e361d05dee2aa6303a69fc26423c8e
     END
   END la_data_in[50]
   PIN la_data_in[49]
