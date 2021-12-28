@@ -40,10 +40,10 @@ module BrqRV_EB1_tb();
     assign mprj_ready = mprj_io[37];
     
     assign mprj_io[3] = (CSB == 1'b1) ? 1'b1 : 1'bz;
-    assign mprj_io[8] = (mprj_ready) ? 1'b0 : 1'b1;
-    assign mprj_io[9] = (mprj_ready) ? 1'b1 : 1'b1;
-    assign mprj_io[10] = (mprj_ready) ? 1'b1 : 1'b1;
-    assign mprj_io[35] = 1'b1;
+    assign mprj_io[8] = (mprj_ready) ? 1'b1 : 1'b1; // for memory 0
+    assign mprj_io[9] = (mprj_ready) ? 1'b0 : 1'b1; // for memory 1
+    assign mprj_io[10] = (mprj_ready) ? 1'b1 : 1'b1; // web
+    assign mprj_io[35] = 1'b1; // output selector
     assign mprj_io[26:11] = (mprj_ready) ? count : 16'h0000;
     
     always #12.5 clock <= (clock === 1'b0);
